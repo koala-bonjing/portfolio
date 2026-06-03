@@ -525,6 +525,15 @@ button {
   will-change: transform;
 }
 
+.project-row[role="link"] {
+  cursor: pointer;
+}
+
+.project-row[role="link"]:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 6px;
+}
+
 .project-row:hover,
 .project-row:focus-within {
   border-color: var(--text);

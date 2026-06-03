@@ -14,7 +14,56 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // 2. THEME TOGGLE (Dark/Light)
+  // 2. OPTIMIZED IMAGE FALLBACKS
+  // ============================================
+  const supportsWebp = (() => {
+    const canvas = document.createElement("canvas");
+    return Boolean(
+      canvas.toDataURL &&
+        canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0
+    );
+  })();
+
+  const preloadImage = (src, onLoad, onError) => {
+    const image = new Image();
+    image.onload = onLoad;
+    image.onerror = onError;
+    image.src = src;
+  };
+
+  const missingOptimizedImages = new Set();
+
+  const upgradeStaticImage = (img) => {
+    const webpSrc = img.dataset.webpSrc;
+    if (!supportsWebp || !webpSrc || missingOptimizedImages.has(webpSrc)) return;
+
+    preloadImage(webpSrc, () => {
+      img.src = webpSrc;
+    }, () => {
+      missingOptimizedImages.add(webpSrc);
+    });
+  };
+
+  const optimizedImages = document.querySelectorAll("img[data-webp-src]");
+  if ("IntersectionObserver" in window) {
+    const imageObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          upgradeStaticImage(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "360px" }
+    );
+
+    optimizedImages.forEach((img) => imageObserver.observe(img));
+  } else {
+    optimizedImages.forEach(upgradeStaticImage);
+  }
+
+  // ============================================
+  // 3. THEME TOGGLE (Dark/Light)
   // ============================================
   const themeToggle = document.querySelector(".theme-toggle");
   const html = document.documentElement;
@@ -51,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // 3. CUSTOM CURSOR (Dual-Lerp Animation)
+  // 4. CUSTOM CURSOR (Dual-Lerp Animation)
   // ============================================
   const cursor = document.querySelector(".cursor");
   const follower = document.querySelector(".cursor-follower");
@@ -94,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // 4. TEXT SPLITTER FOR MASK REVEALS
+  // 5. TEXT SPLITTER FOR MASK REVEALS
   // ============================================
   const splitText = (el) => {
     if (!el) return;
@@ -114,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
   splitText(subtitle);
 
   // ============================================
-  // 5. INTRO TIMELINE (Lines + Text Reveals)
+  // 6. INTRO TIMELINE (Lines + Text Reveals)
   // ============================================
   const introTl = gsap.timeline();
 
@@ -149,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   // ============================================
-  // 6. ABOUT IMAGE PARALLAX
+  // 7. ABOUT IMAGE PARALLAX
   // ============================================
   const aboutImg = document.querySelector(".about-image img");
   if (aboutImg) {
@@ -171,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // 7. SCROLL REVEAL ANIMATIONS
+  // 8. SCROLL REVEAL ANIMATIONS
   // ============================================
   const reveals = document.querySelectorAll(".reveal:not(.hero *):not(#credentials .reveal)");
   reveals.forEach((el) => {
@@ -193,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ============================================
-  // 8. CREDENTIALS SECTION SCROLL SEQUENCE
+  // 9. CREDENTIALS SECTION SCROLL SEQUENCE
   // ============================================
   const credentialsSection = document.querySelector("#credentials");
   if (credentialsSection) {
@@ -325,7 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // 9. PROJECT FLOATING PREVIEW (Image Follower)
+  // 10. PROJECT FLOATING PREVIEW (Image Follower)
   // ============================================
   const preview = document.querySelector(".project-floating-preview");
   const previewImg = preview ? preview.querySelector(".preview-img") : null;
@@ -364,6 +413,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (imgUrl) {
           previewImg.src = imgUrl;
           previewImg.alt = item.dataset.previewAlt || "";
+          const webpUrl = item.dataset.imageWebp;
+          if (supportsWebp && webpUrl && !missingOptimizedImages.has(webpUrl)) {
+            preloadImage(webpUrl, () => {
+              previewImg.src = webpUrl;
+            }, () => {
+              missingOptimizedImages.add(webpUrl);
+            });
+          }
         }
         const isCertificatePreview = item.classList.contains("certification-card");
         preview.classList.toggle("certificate-preview", isCertificatePreview);
@@ -384,7 +441,42 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // 10. PROJECT CATEGORY FILTER (with animations)
+  // 11. PROJECT ROW LINKS
+  // ============================================
+  const clickableProjectRows = document.querySelectorAll(".project-row");
+  clickableProjectRows.forEach((row) => {
+    const link = row.querySelector(".project-link[href]");
+    const href = link ? link.getAttribute("href") : "";
+    const hasRealLink = href && href !== "#";
+
+    if (!hasRealLink) return;
+
+    row.setAttribute("role", "link");
+    row.setAttribute("tabindex", "0");
+
+    const openProjectLink = () => {
+      const target = link.getAttribute("target");
+      if (target === "_blank") {
+        window.open(href, "_blank", "noopener,noreferrer");
+        return;
+      }
+      window.location.href = href;
+    };
+
+    row.addEventListener("click", (event) => {
+      if (event.target.closest("a, button")) return;
+      openProjectLink();
+    });
+
+    row.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      openProjectLink();
+    });
+  });
+
+  // ============================================
+  // 12. PROJECT CATEGORY FILTER (with animations)
   // ============================================
   const filterBtns = document.querySelectorAll(".filter-btn");
   const rows = document.querySelectorAll(".project-row");
@@ -431,7 +523,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ============================================
-  // 11. MAGNETIC BUTTONS EFFECT
+  // 13. MAGNETIC BUTTONS EFFECT
   // ============================================
   const magneticEls = document.querySelectorAll(".logo, .theme-toggle, .btn");
   magneticEls.forEach((el) => {
