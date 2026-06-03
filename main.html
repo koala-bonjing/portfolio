@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Sonny Dela Cruz — Software Developer</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header class="site-header">
+      <div class="container grid-12">
+        <a href="#" class="logo" data-cursor="hover">SDC</a>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="#about" data-cursor="hover">About</a></li>
+            <li><a href="#projects" data-cursor="hover">Work</a></li>
+            <li><a href="#skills" data-cursor="hover">Skills</a></li>
+            <li><a href="#credentials" data-cursor="hover">Credentials</a></li>
+            <li><a href="#experience" data-cursor="hover">Experience</a></li>
+            <li><a href="#contact" data-cursor="hover">Contact</a></li>
+          </ul>
+        </nav>
+        <button
+          class="theme-toggle"
+          aria-label="Toggle theme"
+          data-cursor="hover"
+        >
+          <span class="icon-sun">☀</span>
+          <span class="icon-moon">☾</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section id="hero" class="hero section">
+        <div class="container grid-12">
+          <div class="hero-content col-span-12 col-start-1">
+            <p class="overline reveal">Software Developer</p>
+            <h1 class="display reveal">Sonny Dela Cruz</h1>
+            <p class="subtitle reveal">
+              I build full-stack web apps that solve real problems. React ·
+              TypeScript · Node.js · AI Integration
+            </p>
+            <div class="hero-actions reveal">
+              <a href="#projects" class="btn primary" data-cursor="hover"
+                >View Work</a
+              >
+              <a
+                href="/resume/Crizandro Sonny Dela Cruz' resume (2).pdf"
+                class="btn secondary"
+                download
+                data-cursor="hover"
+                >Download Resume</a
+              >
+            </div>
+          </div>
+          <div class="grid-lines" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="about section">
+        <div class="container about-layout">
+          <div class="about-image reveal">
+            <div class="img-placeholder" data-cursor="hover">
+              <img src="hero-image.jpg" alt="Photo of Sonny Dela Cruz" />
+            </div>
+          </div>
+          <div class="about-text reveal">
+            <h2 class="section-title">About</h2>
+            <p>
+              I'm Sonny, a full-stack developer based in Irosin, Sorsogon with a
+              background in building production-ready web applications. I
+              graduated with a BS in Computer Science from CCDI, where I also
+              led the development of the CCDI Automated Career Assessment Test —
+              an AI-powered platform now used for institutional enrollment. I've
+              worked professionally as a frontend intern at OnDemand Innovation,
+              building React/TypeScript UIs integrated with RESTful APIs in a
+              Scrum environment, and contributed to a production healthcare LIS
+              called LabXchange, handling security, RBAC, and data integrity
+              features.
+            </p>
+            <p>
+              I care about clean architecture, real-world impact, and writing
+              code that lasts.
+            </p>
+            <div class="tech-tags">
+              <span>JavaScript</span><span>TypeScript</span><span>Java</span
+              ><span>C#</span><span>Python</span><span>React</span> <span>Node.js</span
+              ><span>CSS Architecture</span> <span>GSAP</span
+              ><span>Web Performance</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="projects section">
+        <div class="container grid-12">
+          <h2 class="section-title col-span-12 reveal">Selected Work</h2>
+          <div class="filter-bar col-span-12 reveal">
+            <button
+              class="filter-btn active"
+              data-filter="all"
+              data-cursor="hover"
+            >
+              All
+            </button>
+            <button
+              class="filter-btn"
+              data-filter="frontend"
+              data-cursor="hover"
+            >
+              Frontend
+            </button>
+            <button
+              class="filter-btn"
+              data-filter="fullstack"
+              data-cursor="hover"
+            >
+              Fullstack
+            </button>
+            <button
+              class="filter-btn"
+              data-filter="tooling"
+              data-cursor="hover"
+            >
+              Tooling
+            </button>
+          </div>
+          <div class="projects-list col-span-12">
+            <article
+              class="project-row reveal"
+              data-category="fullstack"
+              data-image="ccdi-career.png"
+            >
+              <div class="project-num">01</div>
+              <div class="project-title-wrapper">
+                <h3>CCDI Automated Career Assessment Test</h3>
+                <span class="project-tech"
+                  >MongoDB / React / Node.js / Express</span
+                >
+              </div>
+              <div class="project-type">FullStack</div>
+              <a href="#" class="project-link" data-cursor="hover">
+                <span class="arrow-wrap"
+                  ><span class="arrow-visible">→</span
+                  ><span class="arrow-hidden">→</span></span
+                >
+              </a>
+            </article>
+            <article
+              class="project-row reveal"
+              data-category="frontend"
+              data-image="labX.png"
+            >
+              <div class="project-num">02</div>
+              <div class="project-title-wrapper">
+                <h3>LabXchange 360</h3>
+                <span class="project-tech"
+                  >React / ShadcnUi / Tanstack Query</span
+                >
+              </div>
+              <div class="project-type">Frontend</div>
+              <a href="#" class="project-link" data-cursor="hover">
+                <span class="arrow-wrap"
+                  ><span class="arrow-visible">→</span
+                  ><span class="arrow-hidden">→</span></span
+                >
+              </a>
+            </article>
+            <article
+              class="project-row reveal"
+              data-category="tooling"
+              data-image="hero-image.jpg"
+            >
+              <div class="project-num">03</div>
+              <div class="project-title-wrapper">
+                <h3>CLI Scaffold Generator</h3>
+                <span class="project-tech">Node / Commander / EJS</span>
+              </div>
+              <div class="project-type">Tooling</div>
+              <a href="#" class="project-link" data-cursor="hover">
+                <span class="arrow-wrap"
+                  ><span class="arrow-visible">→</span
+                  ><span class="arrow-hidden">→</span></span
+                >
+              </a>
+            </article>
+            <article
+              class="project-row reveal"
+              data-category="frontend"
+              data-image="labX.png"
+            >
+              <div class="project-num">04</div>
+              <div class="project-title-wrapper">
+                <h3>Tutor Peer Finder</h3>
+                <span class="project-tech"
+                  >React / Node.js / Express / PostgreSQL</span
+                >
+              </div>
+              <div class="project-type">Frontend</div>
+              <a href="#" class="project-link" data-cursor="hover">
+                <span class="arrow-wrap"
+                  ><span class="arrow-visible">→</span
+                  ><span class="arrow-hidden">→</span></span
+                >
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section - 4 Columns -->
+      <section id="skills" class="skills section">
+        <div class="container grid-12">
+          <h2 class="section-title col-span-12 reveal">Capabilities</h2>
+          <div class="skills-grid col-span-12">
+            <div class="skill-block reveal" data-cursor="hover">
+              <div class="skill-top">
+                <span class="skill-index">01</span>
+                <span class="skill-icon" aria-hidden="true">
+                  <i class="fa-solid fa-layer-group"></i>
+                </span>
+              </div>
+              <h3>Frontend</h3>
+              <p class="skill-summary">
+                Product interfaces with responsive structure and smooth motion.
+              </p>
+              <ul>
+                <li>
+                  <span>React / Next.js </span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>TypeScript / JavaScript / Java</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>CSS Architecture / Tailwind / ShadCN</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>Animation / GSAP / Framer Motion</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="skill-block reveal" data-cursor="hover">
+              <div class="skill-top">
+                <span class="skill-index">02</span>
+                <span class="skill-icon" aria-hidden="true">
+                  <i class="fa-solid fa-server"></i>
+                </span>
+              </div>
+              <h3>Backend</h3>
+              <p class="skill-summary">
+                API logic, data flow, and authentication for usable systems.
+              </p>
+              <ul>
+                <li>
+                  <span>Node.js / Express</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>REST / GraphQL</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>PostgreSQL / MongoDB</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>Authentication & Security</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="skill-block reveal" data-cursor="hover">
+              <div class="skill-top">
+                <span class="skill-index">03</span>
+                <span class="skill-icon" aria-hidden="true">
+                  <i class="fa-solid fa-screwdriver-wrench"></i>
+                </span>
+              </div>
+              <h3>Tooling</h3>
+              <p class="skill-summary">
+                Development workflows that keep projects clean and shippable.
+              </p>
+              <ul>
+                <li>
+                  <span>Vite / Webpack / CI/CD</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>VS Code / Android Studio</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>ESLint / Prettier</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>Performance Auditing</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="skill-block reveal" data-cursor="hover">
+              <div class="skill-top">
+                <span class="skill-index">04</span>
+                <span class="skill-icon" aria-hidden="true">
+                  <i class="fa-solid fa-diagram-project"></i>
+                </span>
+              </div>
+              <h3>Process</h3>
+              <p class="skill-summary">
+                Practical product thinking from component systems to teamwork.
+              </p>
+              <ul>
+                <li>
+                  <span>Component-Driven Development</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>Design System Implementation</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>Accessibility (WCAG 2.2)</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+                <li>
+                  <span>Agile / Collaborative Workflows</span
+                  ><i class="fa-solid fa-arrow-right"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Credentials Section with Fixed Education Spacing -->
+      <section id="credentials" class="credentials section">
+        <div class="container grid-12">
+          <div class="credentials-info col-span-12 col-start-1 reveal">
+            <h2 class="section-title">Credentials</h2>
+            <p class="subtitle">
+              Academic foundation separated from professional certificates for
+              easier scanning.
+            </p>
+          </div>
+          <div
+            class="credential-group education-group col-span-12 col-start-1 reveal"
+          >
+            <h3 class="credential-group-title">Education</h3>
+            <div class="education-timeline">
+              <article class="education-step" data-cursor="hover">
+                <span class="education-marker" aria-hidden="true"></span>
+                <div class="education-copy">
+                  <span class="education-date">Primary | 2010 - 2016</span>
+                  <h3>Gabao Elementary School</h3>
+                  <p>
+                    Foundational years focused on core academics, curiosity, and
+                    early problem-solving habits.
+                  </p>
+                  <div class="education-meta-list">
+                    <span class="education-meta">
+                      <span
+                        class="education-meta-icon location"
+                        aria-hidden="true"
+                      ></span>
+                      Gabao, Irosin, Sorsogon
+                    </span>
+                    <span class="education-meta">
+                      <span
+                        class="education-meta-icon honor"
+                        aria-hidden="true"
+                      ></span>
+                      With Honors
+                    </span>
+                  </div>
+                </div>
+              </article>
+              <article class="education-step" data-cursor="hover">
+                <span class="education-marker" aria-hidden="true"></span>
+                <div class="education-copy">
+                  <span class="education-date">Secondary | 2016 - 2020 </span>
+                  <h3>Gabao National High School</h3>
+                  <p>
+                    Built stronger technical discipline through math,
+                    communication, research, and computer fundamentals.
+                  </p>
+                  <div class="education-meta-list">
+                    <span class="education-meta">
+                      <span
+                        class="education-meta-icon location"
+                        aria-hidden="true"
+                      ></span>
+                      Gabao, Irosin, Sorsogon
+                    </span>
+                    <span class="education-meta">
+                      <span
+                        class="education-meta-icon honor"
+                        aria-hidden="true"
+                      ></span>
+                      With Honors
+                    </span>
+                  </div>
+                </div>
+              </article>
+              <article class="education-step" data-cursor="hover">
+                <span class="education-marker" aria-hidden="true"></span>
+                <div class="education-copy">
+                  <span class="education-date">Senior High | 2020 - 2022</span>
+                  <h3>Computer System Services</h3>
+                  <p>
+                    Gabao National High School Senior High School - Technical
+                    Vocational Track with specialization in Computer System
+                    Services.
+                  </p>
+                  <div class="education-meta-list">
+                    <span class="education-meta">
+                      <span
+                        class="education-meta-icon location"
+                        aria-hidden="true"
+                      ></span>
+                      Gabao, Irosin, Sorsogon
+                    </span>
+                    <span class="education-meta">
+                      <span
+                        class="education-meta-icon honor"
+                        aria-hidden="true"
+                      ></span>
+                      With Honors
+                    </span>
+                  </div>
+                </div>
+              </article>
+              <article
+                class="education-step education-step-current"
+                data-cursor="hover"
+              >
+                <span class="education-marker" aria-hidden="true"></span>
+                <div class="education-copy">
+                  <span class="education-date"
+                    >Bachelor's Degree | 2022 - 2026</span
+                  >
+                  <h3>Bachelor of Science in Computer Science</h3>
+                  <p class="credential-institution">
+                    Computer Communication Development Institute Sorsogon
+                  </p>
+                  <div class="education-meta-list">
+                    <span class="education-meta">
+                      <span
+                        class="education-meta-icon location"
+                        aria-hidden="true"
+                      ></span>
+                      Sorosgon City, Philippines
+                    </span>
+                    <span class="education-meta">
+                      <span
+                        class="education-meta-icon honor"
+                        aria-hidden="true"
+                      ></span>
+                      Profecincy Award in Database Management
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div
+            class="credential-group certification-group col-span-12 col-start-1 reveal"
+          >
+            <h3 class="credential-group-title">Certifications</h3>
+            <div
+              class="certification-slider"
+              aria-label="Certifications carousel"
+            >
+              <div class="certification-track">
+                <div class="certification-loop">
+                  <article
+                    class="certification-card"
+                    data-cursor="hover"
+                    data-image="certifications/image.png"
+                    data-preview-alt="Build a Faster, More Structured Express API with Node.js and TypeScript certificate"
+                  >
+                    <div
+                      class="credential-logo-placeholder certificate-badge"
+                      aria-hidden="true"
+                    >
+                      <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="credential-meta">
+                      <span class="credential-date">2025</span>
+                      <h3>
+                        Build a Faster, More Structured Express API with Node.js
+                        and TypeScript
+                      </h3>
+                      <p class="credential-institution">LinkedIn Learning</p>
+                      <p class="credential-detail">
+                        API development, Node.js back-end structure, and typed
+                        Express workflows.
+                      </p>
+                    </div>
+                  </article>
+                  <article
+                    class="certification-card"
+                    data-cursor="hover"
+                    data-image="certifications/image%20(1).png"
+                    data-preview-alt="Learning TypeScript certificate"
+                  >
+                    <div
+                      class="credential-logo-placeholder certificate-badge"
+                      aria-hidden="true"
+                    >
+                      <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="credential-meta">
+                      <span class="credential-date">2025</span>
+                      <h3>Learning TypeScript</h3>
+                      <p class="credential-institution">LinkedIn Learning</p>
+                      <p class="credential-detail">
+                        Core TypeScript concepts for safer JavaScript
+                        development and typed application workflows.
+                      </p>
+                    </div>
+                  </article>
+                  <article
+                    class="certification-card"
+                    data-cursor="hover"
+                    data-image="certifications/image%20(2).png"
+                    data-preview-alt="React: Using TypeScript certificate"
+                  >
+                    <div
+                      class="credential-logo-placeholder certificate-badge"
+                      aria-hidden="true"
+                    >
+                      <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="credential-meta">
+                      <span class="credential-date">2025</span>
+                      <h3>React: Using TypeScript</h3>
+                      <p class="credential-institution">LinkedIn Learning</p>
+                      <p class="credential-detail">
+                        Typed React components, props, and front-end patterns
+                        for stronger interface code.
+                      </p>
+                    </div>
+                  </article>
+                  <article
+                    class="certification-card"
+                    data-cursor="hover"
+                    data-image="certifications/image%20(3).png"
+                    data-preview-alt="TypeScript: Object-Oriented Programming certificate"
+                  >
+                    <div
+                      class="credential-logo-placeholder certificate-badge"
+                      aria-hidden="true"
+                    >
+                      <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="credential-meta">
+                      <span class="credential-date">2025</span>
+                      <h3>TypeScript: Object-Oriented Programming</h3>
+                      <p class="credential-institution">LinkedIn Learning</p>
+                      <p class="credential-detail">
+                        Object-oriented TypeScript using classes, interfaces,
+                        and reusable application structure.
+                      </p>
+                    </div>
+                  </article>
+                </div>
+                <div class="certification-loop" aria-hidden="true">
+                  <article
+                    class="certification-card"
+                    data-cursor="hover"
+                    data-image="certifications/image.png"
+                  >
+                    <div
+                      class="credential-logo-placeholder certificate-badge"
+                      aria-hidden="true"
+                    >
+                      <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="credential-meta">
+                      <span class="credential-date">2025</span>
+                      <h3>
+                        Build a Faster, More Structured Express API with Node.js
+                        and TypeScript
+                      </h3>
+                      <p class="credential-institution">LinkedIn Learning</p>
+                      <p class="credential-detail">
+                        API development, Node.js back-end structure, and typed
+                        Express workflows.
+                      </p>
+                    </div>
+                  </article>
+                  <article
+                    class="certification-card"
+                    data-cursor="hover"
+                    data-image="certifications/image%20(1).png"
+                  >
+                    <div
+                      class="credential-logo-placeholder certificate-badge"
+                      aria-hidden="true"
+                    >
+                      <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="credential-meta">
+                      <span class="credential-date">2025</span>
+                      <h3>Learning TypeScript</h3>
+                      <p class="credential-institution">LinkedIn Learning</p>
+                      <p class="credential-detail">
+                        Core TypeScript concepts for safer JavaScript
+                        development and typed application workflows.
+                      </p>
+                    </div>
+                  </article>
+                  <article
+                    class="certification-card"
+                    data-cursor="hover"
+                    data-image="certifications/image%20(2).png"
+                  >
+                    <div
+                      class="credential-logo-placeholder certificate-badge"
+                      aria-hidden="true"
+                    >
+                      <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="credential-meta">
+                      <span class="credential-date">2025</span>
+                      <h3>React: Using TypeScript</h3>
+                      <p class="credential-institution">LinkedIn Learning</p>
+                      <p class="credential-detail">
+                        Typed React components, props, and front-end patterns
+                        for stronger interface code.
+                      </p>
+                    </div>
+                  </article>
+                  <article
+                    class="certification-card"
+                    data-cursor="hover"
+                    data-image="certifications/image%20(3).png"
+                  >
+                    <div
+                      class="credential-logo-placeholder certificate-badge"
+                      aria-hidden="true"
+                    >
+                      <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="credential-meta">
+                      <span class="credential-date">2025</span>
+                      <h3>TypeScript: Object-Oriented Programming</h3>
+                      <p class="credential-institution">LinkedIn Learning</p>
+                      <p class="credential-detail">
+                        Object-oriented TypeScript using classes, interfaces,
+                        and reusable application structure.
+                      </p>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience" class="experience section">
+        <div class="container grid-12">
+          <h2 class="section-title col-span-12 reveal">Experience</h2>
+          <div class="experience-list col-span-12">
+            <article class="experience-item reveal">
+              <time>October 2025 - February 2026</time>
+              <div class="experience-logo">
+                <img src="tidewrk.png" alt="Tidewrk logo" />
+              </div>
+              <div class="experience-copy">
+                <h3>
+                  <a
+                    href="https://www.tidewrk.com/"
+                    data-cursor="hover"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Frontend Developer Intern - Tidewrk.inc</a
+                  >
+                </h3>
+                <p>
+                  Built dynamic assessment workflows, interactive dashboards,
+                  and full-stack MERN features to enhance career guidance
+                  platforms.
+                </p>
+              </div>
+            </article>
+
+            <article class="experience-item reveal">
+              <time>2024</time>
+              <div class="experience-logo">
+                <img src="otxsource.png" alt="OutXsource Inc logo" />
+              </div>
+              <div class="experience-copy">
+                <h3>
+                  <a href="#" data-cursor="hover"
+                    >Data Collection Specialist - OutXsource Inc</a
+                  >
+                </h3>
+                <p>
+                  Gathered, structured, and verified diverse datasets to ensure
+                  high data integrity and accuracy for analytical processing and
+                  reporting.
+                </p>
+              </div>
+            </article>
+
+            <article class="experience-item reveal">
+              <time>2024</time>
+              <div class="experience-logo">
+                <img src="otxsource.png" alt="OutXsource Inc logo" />
+              </div>
+              <div class="experience-copy">
+                <h3>
+                  <a href="#" data-cursor="hover"
+                    >Data Annotation Specialist - OutXsource Inc</a
+                  >
+                </h3>
+                <p>
+                  Accurately labeled, tagged, and categorized complex data
+                  assets to train, evaluate, and optimize the performance of
+                  machine learning models.
+                </p>
+              </div>
+            </article>
+
+            <article class="experience-item reveal">
+              <time>2024</time>
+              <div class="experience-logo">
+                <span>SDC</span>
+              </div>
+              <div class="experience-copy">
+                <h3>
+                  <a href="#" data-cursor="hover">Freelance Developer</a>
+                </h3>
+                <p>
+                  Designed and engineered custom web and mobile applications
+                  leveraging Nextjs, React and TypeScript for diverse projects.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <!-- Contact Section -->
+      <section id="contact" class="contact section">
+        <div class="container grid-12">
+          <div class="contact-info col-span-5 col-start-1 reveal">
+            <h2 class="section-title">Contact</h2>
+            <p>Open to collaborations, contract work, or just talking shop.</p>
+            <a
+              href="mailto:sonnygdelacruz@gmail.com"
+              class="contact-email"
+              data-cursor="hover"
+              >sonnygdelacruz@gmail.com</a
+            >
+            <div class="socials">
+              <a
+                href="https://github.com/koala-bonjing"
+                data-cursor="hover"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+
+              <a
+                href="#"
+                data-cursor="hover"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-linkedin"></i> LinkedIn
+              </a>
+            </div>
+          </div>
+          <form
+            class="contact-form col-span-7 col-start-6 reveal"
+            id="contactForm"
+          >
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn primary" data-cursor="hover">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+              Send Message
+            </button>
+            <p class="form-status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container grid-12">
+        <p class="col-span-6">© <span id="year"></span> Sonny Dela Cruz</p>
+        <p class="col-span-6 text-right">Built with intent. No templates.</p>
+      </div>
+    </footer>
+
+    <!-- Project Floating Preview Container -->
+    <div class="project-floating-preview" aria-hidden="true">
+      <div class="preview-inner">
+        <img src="" alt="" class="preview-img" />
+      </div>
+    </div>
+
+    <!-- Structural Grid Lines Background -->
+    <div class="structural-grid-lines" aria-hidden="true">
+      <div class="grid-line-v"></div>
+      <div class="grid-line-v"></div>
+      <div class="grid-line-v"></div>
+      <div class="grid-line-v"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
