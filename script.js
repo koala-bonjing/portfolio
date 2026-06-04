@@ -5,6 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Register GSAP plugins
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+  const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const smallScreenQuery = window.matchMedia("(max-width: 700px)");
+  const canUseHoverEffects = finePointerQuery.matches && !reducedMotionQuery.matches;
+  const useLiteMotion =
+    reducedMotionQuery.matches || smallScreenQuery.matches || !finePointerQuery.matches;
+
   // ============================================
   // 1. FOOTER YEAR
   // ============================================
@@ -108,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let cursorX = 0, cursorY = 0;
   let followerX = 0, followerY = 0;
 
-  if (cursor && follower) {
+  if (cursor && follower && canUseHoverEffects) {
     document.addEventListener("mousemove", (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -168,32 +175,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const introTl = gsap.timeline();
 
   // Animate structural grid lines
-  introTl.fromTo(
-    ".grid-line-v",
-    { height: "0%" },
-    { height: "100%", duration: 1.4, ease: "power4.inOut", stagger: 0.15 }
-  );
+  if (!useLiteMotion) {
+    introTl.fromTo(
+      ".grid-line-v",
+      { height: "0%" },
+      { height: "100%", duration: 1.4, ease: "power4.inOut", stagger: 0.15 }
+    );
+  }
 
   // Reveal hero text with word-by-word animation
   introTl.to(
     ".hero .overline .word-inner",
-    { y: "0%", duration: 0.8, ease: "power3.out", stagger: 0.05 },
+    {
+      y: "0%",
+      duration: useLiteMotion ? 0.35 : 0.8,
+      ease: "power3.out",
+      stagger: useLiteMotion ? 0.015 : 0.05,
+    },
     "-=0.8"
   );
   introTl.to(
     ".hero .display .word-inner",
-    { y: "0%", duration: 1.2, ease: "power4.out", stagger: 0.04 },
+    {
+      y: "0%",
+      duration: useLiteMotion ? 0.55 : 1.2,
+      ease: useLiteMotion ? "power3.out" : "power4.out",
+      stagger: useLiteMotion ? 0.012 : 0.04,
+    },
     "-=0.8"
   );
   introTl.to(
     ".hero .subtitle .word-inner",
-    { y: "0%", duration: 0.8, ease: "power3.out", stagger: 0.03 },
+    {
+      y: "0%",
+      duration: useLiteMotion ? 0.4 : 0.8,
+      ease: "power3.out",
+      stagger: useLiteMotion ? 0.01 : 0.03,
+    },
     "-=0.9"
   );
   introTl.fromTo(
     ".hero-actions",
     { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+    { opacity: 1, y: 0, duration: useLiteMotion ? 0.4 : 0.8, ease: "power3.out" },
     "-=0.6"
   );
 
@@ -201,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 7. ABOUT IMAGE PARALLAX
   // ============================================
   const aboutImg = document.querySelector(".about-image img");
-  if (aboutImg) {
+  if (aboutImg && !useLiteMotion) {
     gsap.fromTo(
       aboutImg,
       { yPercent: -8, scale: 1.08 },
@@ -226,16 +250,16 @@ document.addEventListener("DOMContentLoaded", () => {
   reveals.forEach((el) => {
     gsap.fromTo(
       el,
-      { y: 40, opacity: 0 },
+      { y: useLiteMotion ? 18 : 40, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 1.0,
+        duration: useLiteMotion ? 0.45 : 1.0,
         ease: "power3.out",
         scrollTrigger: {
           trigger: el,
           start: "top 85%",
-          toggleActions: "play none none reverse",
+          toggleActions: useLiteMotion ? "play none none none" : "play none none reverse",
         },
       }
     );
@@ -245,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 9. CREDENTIALS SECTION SCROLL SEQUENCE
   // ============================================
   const credentialsSection = document.querySelector("#credentials");
-  if (credentialsSection) {
+  if (credentialsSection && !useLiteMotion) {
     const credentialsInfo = credentialsSection.querySelector(".credentials-info");
     const educationTitle = credentialsSection.querySelector(".education-group .credential-group-title");
     const educationTimeline = credentialsSection.querySelector(".education-timeline");
@@ -385,7 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let targetX = 0, targetY = 0;
   let previewX = 0, previewY = 0;
 
-  if (preview && previewImg) {
+  if (preview && previewImg && canUseHoverEffects) {
     const setPreviewPosition = () => {
       preview.style.setProperty("--preview-x", `${previewX}px`);
       preview.style.setProperty("--preview-y", `${previewY}px`);
@@ -526,43 +550,51 @@ document.addEventListener("DOMContentLoaded", () => {
   // 13. MAGNETIC BUTTONS EFFECT
   // ============================================
   const magneticEls = document.querySelectorAll(".logo, .theme-toggle, .btn");
-  magneticEls.forEach((el) => {
-    el.addEventListener("mousemove", (e) => {
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      
-      // Magnetic pull with 35% influence
-      gsap.to(el, {
-        x: x * 0.35,
-        y: y * 0.35,
-        duration: 0.3,
-        ease: "power2.out",
+  if (canUseHoverEffects) {
+    magneticEls.forEach((el) => {
+      el.addEventListener("mousemove", (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        // Magnetic pull with 35% influence
+        gsap.to(el, {
+          x: x * 0.35,
+          y: y * 0.35,
+          duration: 0.3,
+          ease: "power2.out",
+        });
       });
-    });
 
-    el.addEventListener("mouseleave", () => {
-      // Elastic return to center
-      gsap.to(el, {
-        x: 0,
-        y: 0,
-        duration: 0.6,
-        ease: "elastic.out(1.1, 0.4)",
+      el.addEventListener("mouseleave", () => {
+        // Elastic return to center
+        gsap.to(el, {
+          x: 0,
+          y: 0,
+          duration: 0.6,
+          ease: "elastic.out(1.1, 0.4)",
+        });
       });
     });
-  });
+  }
 
   // ============================================
   // 11. STICKY HEADER (Always Visible)
   // ============================================
   const header = document.querySelector(".site-header");
 
+  let headerTicking = false;
   window.addEventListener("scroll", () => {
-    if (header) {
-      header.style.transform = "translateY(0)";
-      header.style.borderColor = "var(--border)";
-      updateHeaderBackground();
-    }
+    if (headerTicking) return;
+    headerTicking = true;
+    requestAnimationFrame(() => {
+      if (header) {
+        header.style.transform = "translateY(0)";
+        header.style.borderColor = "var(--border)";
+        updateHeaderBackground();
+      }
+      headerTicking = false;
+    });
   });
 
   // ============================================
@@ -627,13 +659,73 @@ document.addEventListener("DOMContentLoaded", () => {
   const certSlider = document.querySelector(".certification-slider");
   const certTrack = document.querySelector(".certification-track");
   
-  if (certSlider && certTrack) {
+  if (certSlider && certTrack && canUseHoverEffects) {
     certSlider.addEventListener("mouseenter", () => {
       certTrack.style.animationPlayState = "paused";
     });
     certSlider.addEventListener("mouseleave", () => {
       certTrack.style.animationPlayState = "running";
     });
+  }
+
+  if (certSlider && certTrack) {
+    const mobileCertCards = certSlider.querySelectorAll(
+      ".certification-loop:not([aria-hidden]) .certification-card"
+    );
+
+    if (mobileCertCards.length > 1) {
+      const dots = document.createElement("div");
+      dots.className = "certification-dots";
+      dots.setAttribute("aria-label", "Certificate slide controls");
+
+      const dotButtons = Array.from(mobileCertCards, (_, index) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "certification-dot";
+        dot.setAttribute("aria-label", `Show certificate ${index + 1}`);
+        dot.addEventListener("click", () => {
+          certTrack.scrollTo({
+            left: mobileCertCards[index].offsetLeft,
+            behavior: "smooth",
+          });
+        });
+        dots.appendChild(dot);
+        return dot;
+      });
+
+      certSlider.appendChild(dots);
+
+      const setActiveDot = (activeIndex) => {
+        dotButtons.forEach((dot, index) => {
+          dot.classList.toggle("active", index === activeIndex);
+          dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+        });
+      };
+
+      const getActiveCertificateIndex = () => {
+        const firstCard = mobileCertCards[0];
+        const secondCard = mobileCertCards[1];
+        const step = secondCard
+          ? secondCard.offsetLeft - firstCard.offsetLeft
+          : firstCard.offsetWidth;
+        return Math.max(
+          0,
+          Math.min(mobileCertCards.length - 1, Math.round(certTrack.scrollLeft / step))
+        );
+      };
+
+      let certDotTicking = false;
+      certTrack.addEventListener("scroll", () => {
+        if (certDotTicking) return;
+        certDotTicking = true;
+        requestAnimationFrame(() => {
+          setActiveDot(getActiveCertificateIndex());
+          certDotTicking = false;
+        });
+      });
+
+      setActiveDot(0);
+    }
   }
 
   // ============================================
