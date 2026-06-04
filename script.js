@@ -465,39 +465,235 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // 11. PROJECT ROW LINKS
+  // 11. PROJECT DETAIL MODAL
   // ============================================
-  const clickableProjectRows = document.querySelectorAll(".project-row");
-  clickableProjectRows.forEach((row) => {
-    const link = row.querySelector(".project-link[href]");
-    const href = link ? link.getAttribute("href") : "";
-    const hasRealLink = href && href !== "#";
+  const projectDetails = {
+    "ccdi-career": {
+      count: "01 / 04",
+      title: "CCDI Automated Career Assessment Test",
+      type: "Full Stack",
+      shortDescription:
+        "AI-assisted student assessment platform that recommends career tracks and supports enrollment decisions for CCDI.",
+      stack: ["MongoDB", "React", "Node.js", "Express"],
+      image: "ccdi-career.webp",
+      imageAlt: "CCDI Automated Career Assessment Test interface",
+      site: "https://ccdi-career-assestment.vercel.app",
+      github: "https://github.com/koala-bonjing/ccdi-career-assestment",
+      overview:
+        "This project turns career assessment into a guided digital workflow. Students answer structured questions, the system processes their responses, and the interface presents career-aligned recommendations that are easier for staff and students to review.",
+      features: [
+        "Student-friendly assessment flow with clear step-by-step progression.",
+        "Career recommendation output designed for enrollment support.",
+        "Full-stack data handling for storing assessments and results.",
+        "Responsive interface for reviewing results across desktop and mobile.",
+      ],
+      process: [
+        "Mapped the assessment journey around how students answer questions and how staff interpret results.",
+        "Designed the interface to keep long forms approachable through hierarchy, spacing, and progressive feedback.",
+        "Built the MERN workflow around reusable UI patterns and clear API boundaries.",
+      ],
+    },
+    labxchange: {
+      count: "02 / 04",
+      title: "LabXchange 360",
+      type: "Frontend",
+      shortDescription:
+        "Healthcare laboratory interface focused on secure workflows, role-based access, and reliable patient data handling.",
+      stack: ["React", "shadcn/ui", "TanStack Query", "REST APIs"],
+      image: "labX.webp",
+      imageAlt: "LabXchange 360 dashboard interface",
+      site: "",
+      github: "",
+      overview:
+        "LabXchange 360 is a production healthcare LIS interface built for laboratory workflows. The front-end work focused on making complex operational data easier to scan, protect, and act on in a real clinical environment.",
+      features: [
+        "Role-aware interface patterns for sensitive healthcare operations.",
+        "Data-heavy screens structured for fast scanning and reduced mistakes.",
+        "Reusable React components connected to RESTful API workflows.",
+        "Security-conscious UI behavior for access control and data integrity.",
+      ],
+      process: [
+        "Studied the operational needs of laboratory users before shaping the interface.",
+        "Prioritized dense but readable layouts over decorative visuals.",
+        "Iterated components around reliability, predictable states, and maintainable front-end structure.",
+      ],
+    },
+    "ccdi-admin": {
+      count: "03 / 04",
+      title: "CCDI Automated Career Assessment Test - Admin Dashboard",
+      type: "Full Stack",
+      shortDescription:
+        "Administrative dashboard for managing assessments, reviewing student results, and organizing career guidance data.",
+      stack: ["MongoDB", "React", "Node.js", "Express", "Mantine UI"],
+      image: "admin.webp",
+      imageAlt: "CCDI admin dashboard interface",
+      site: "https://ccdi-admin-capstone.vercel.app/",
+      github: "https://github.com/koala-bonjing/ccdi-admin-capstone",
+      overview:
+        "The admin dashboard gives staff a central place to manage career assessment data, inspect student outputs, and support decision-making without digging through raw records or disconnected tools.",
+      features: [
+        "Dashboard views for monitoring assessment activity and results.",
+        "Management tools for organizing student career guidance information.",
+        "Full-stack CRUD workflows for administrative data handling.",
+        "Clean component structure using Mantine UI for consistent controls.",
+      ],
+      process: [
+        "Separated student-facing and admin-facing needs into distinct workflows.",
+        "Designed dashboard sections around repeat administrative tasks.",
+        "Built the interface with reusable tables, forms, and status patterns to keep the system maintainable.",
+      ],
+    },
+    syncstudy: {
+      count: "04 / 04",
+      title: "SyncStudy - Peer Study Group Finder",
+      type: "Full Stack",
+      shortDescription:
+        "Peer study group finder that helps students discover, organize, and join study sessions with matching interests.",
+      stack: ["React", "Node.js", "Express", "PostgreSQL"],
+      image: "tutor-sync.webp",
+      imageAlt: "SyncStudy peer study group finder interface",
+      site: "",
+      github: "",
+      overview:
+        "SyncStudy is a student collaboration platform concept for connecting learners with study groups that fit their subjects, availability, and goals. The project centers on making peer learning easier to discover and organize.",
+      features: [
+        "Study group discovery based on shared interests and subjects.",
+        "Structured group information for quick comparison and joining.",
+        "Backend-ready model for users, groups, and participation data.",
+        "Responsive interface suited for students checking opportunities on mobile.",
+      ],
+      process: [
+        "Started with the student problem: finding the right people to study with at the right time.",
+        "Shaped the UI around quick comparison, readable group details, and low-friction joining.",
+        "Planned the data model around scalable group membership and future scheduling features.",
+      ],
+    },
+  };
 
-    if (!hasRealLink) return;
+  const projectModal = document.getElementById("projectModal");
+  const projectModalTitle = document.getElementById("projectModalTitle");
+  const projectModalDescription = document.getElementById("projectModalDescription");
+  const projectModalType = document.getElementById("projectModalType");
+  const projectModalCount = document.getElementById("projectModalCount");
+  const projectModalStack = document.getElementById("projectModalStack");
+  const projectModalImage = document.getElementById("projectModalImage");
+  const projectModalOverview = document.getElementById("projectModalOverview");
+  const projectModalFeatures = document.getElementById("projectModalFeatures");
+  const projectModalProcess = document.getElementById("projectModalProcess");
+  const projectModalSite = document.getElementById("projectModalSite");
+  const projectModalGithub = document.getElementById("projectModalGithub");
+  const projectModalPanel = projectModal?.querySelector(".project-modal-panel");
+  let projectModalLastFocus = null;
 
-    row.setAttribute("role", "link");
+  const renderList = (target, items) => {
+    if (!target) return;
+    target.innerHTML = items.map((item) => `<li>${item}</li>`).join("");
+  };
+
+  const renderStack = (target, items) => {
+    if (!target) return;
+    target.innerHTML = items.map((item) => `<span>${item}</span>`).join("");
+  };
+
+  const setModalAction = (link, url) => {
+    if (!link) return;
+    if (url) {
+      link.href = url;
+      link.classList.remove("is-disabled");
+      link.removeAttribute("aria-disabled");
+      link.removeAttribute("tabindex");
+      return;
+    }
+
+    link.href = "#";
+    link.classList.add("is-disabled");
+    link.setAttribute("aria-disabled", "true");
+    link.setAttribute("tabindex", "-1");
+  };
+
+  const openProjectModal = (projectId, trigger) => {
+    const project = projectDetails[projectId];
+    if (!project || !projectModal) return;
+
+    projectModalLastFocus = trigger;
+    projectModalTitle.textContent = project.title;
+    projectModalDescription.textContent = project.shortDescription;
+    projectModalType.textContent = project.type;
+    projectModalCount.textContent = project.count;
+    projectModalImage.src = project.image;
+    projectModalImage.alt = project.imageAlt;
+    projectModalOverview.textContent = project.overview;
+    renderStack(projectModalStack, project.stack);
+    renderList(projectModalFeatures, project.features);
+    renderList(projectModalProcess, project.process);
+    setModalAction(projectModalSite, project.site);
+    setModalAction(projectModalGithub, project.github);
+
+    document.body.classList.add("modal-open");
+    projectModal.classList.add("active");
+    projectModal.setAttribute("aria-hidden", "false");
+    projectModal.querySelector(".project-modal-back")?.focus();
+  };
+
+  const closeProjectModal = () => {
+    if (!projectModal) return;
+
+    projectModal.classList.remove("active");
+    projectModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    projectModalLastFocus?.focus();
+  };
+
+  const projectRows = document.querySelectorAll(".project-row[data-project-id]");
+  projectRows.forEach((row) => {
+    const project = projectDetails[row.dataset.projectId];
+
+    row.setAttribute("role", "button");
     row.setAttribute("tabindex", "0");
-
-    const openProjectLink = () => {
-      const target = link.getAttribute("target");
-      if (target === "_blank") {
-        window.open(href, "_blank", "noopener,noreferrer");
-        return;
-      }
-      window.location.href = href;
-    };
+    row.setAttribute("aria-haspopup", "dialog");
+    row.setAttribute("aria-label", `Open details for ${project?.title || "project"}`);
+    row.querySelector(".project-link")?.setAttribute("tabindex", "-1");
 
     row.addEventListener("click", (event) => {
-      if (event.target.closest("a, button")) return;
-      openProjectLink();
+      event.preventDefault();
+      openProjectModal(row.dataset.projectId, row);
     });
 
     row.addEventListener("keydown", (event) => {
       if (event.key !== "Enter" && event.key !== " ") return;
       event.preventDefault();
-      openProjectLink();
+      openProjectModal(row.dataset.projectId, row);
     });
   });
+
+  projectModal?.querySelectorAll("[data-modal-close]").forEach((control) => {
+    control.addEventListener("click", closeProjectModal);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && projectModal?.classList.contains("active")) {
+      closeProjectModal();
+    }
+  });
+
+  if (projectModalPanel && canUseHoverEffects) {
+    projectModalPanel.addEventListener("mousemove", (event) => {
+      const rect = projectModalPanel.getBoundingClientRect();
+      projectModalPanel.style.setProperty(
+        "--modal-cursor-x",
+        `${event.clientX - rect.left}px`
+      );
+      projectModalPanel.style.setProperty(
+        "--modal-cursor-y",
+        `${event.clientY - rect.top}px`
+      );
+      projectModalPanel.classList.add("cursor-active");
+    });
+
+    projectModalPanel.addEventListener("mouseleave", () => {
+      projectModalPanel.classList.remove("cursor-active");
+    });
+  }
 
   // ============================================
   // 12. PROJECT CATEGORY FILTER (with animations)
@@ -602,18 +798,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (e) => {
-      e.preventDefault();
       const targetId = anchor.getAttribute("href");
-      if (targetId && targetId !== "#") {
-        const target = document.querySelector(targetId);
-        if (target) {
-          gsap.to(window, {
-            duration: 0.28,
-            scrollTo: { y: target, offsetY: 70 },
-            ease: "power2.out",
-            overwrite: "auto",
-          });
-        }
+      if (!targetId || targetId === "#" || !targetId.startsWith("#")) return;
+
+      e.preventDefault();
+      const target = document.querySelector(targetId);
+      if (target) {
+        gsap.to(window, {
+          duration: 0.28,
+          scrollTo: { y: target, offsetY: 70 },
+          ease: "power2.out",
+          overwrite: "auto",
+        });
       }
     });
   });
