@@ -5,12 +5,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Register GSAP plugins
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-  const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const finePointerQuery = window.matchMedia(
+    "(hover: hover) and (pointer: fine)",
+  );
+  const reducedMotionQuery = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
   const smallScreenQuery = window.matchMedia("(max-width: 700px)");
-  const canUseHoverEffects = finePointerQuery.matches && !reducedMotionQuery.matches;
+  const canUseHoverEffects =
+    finePointerQuery.matches && !reducedMotionQuery.matches;
   const useLiteMotion =
-    reducedMotionQuery.matches || smallScreenQuery.matches || !finePointerQuery.matches;
+    reducedMotionQuery.matches ||
+    smallScreenQuery.matches ||
+    !finePointerQuery.matches;
 
   // ============================================
   // 1. FOOTER YEAR
@@ -27,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.createElement("canvas");
     return Boolean(
       canvas.toDataURL &&
-        canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0
+      canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0,
     );
   })();
 
@@ -42,13 +49,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const upgradeStaticImage = (img) => {
     const webpSrc = img.dataset.webpSrc;
-    if (!supportsWebp || !webpSrc || missingOptimizedImages.has(webpSrc)) return;
+    if (!supportsWebp || !webpSrc || missingOptimizedImages.has(webpSrc))
+      return;
 
-    preloadImage(webpSrc, () => {
-      img.src = webpSrc;
-    }, () => {
-      missingOptimizedImages.add(webpSrc);
-    });
+    preloadImage(
+      webpSrc,
+      () => {
+        img.src = webpSrc;
+      },
+      () => {
+        missingOptimizedImages.add(webpSrc);
+      },
+    );
   };
 
   const optimizedImages = document.querySelectorAll("img[data-webp-src]");
@@ -61,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
           observer.unobserve(entry.target);
         });
       },
-      { rootMargin: "360px" }
+      { rootMargin: "360px" },
     );
 
     optimizedImages.forEach((img) => imageObserver.observe(img));
@@ -83,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const next = current === "dark" ? "light" : "dark";
       html.setAttribute("data-theme", next);
       localStorage.setItem("theme", next);
-      
+
       // Update header background dynamically based on theme
       updateHeaderBackground();
     });
@@ -111,9 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================
   const cursor = document.querySelector(".cursor");
   const follower = document.querySelector(".cursor-follower");
-  let mouseX = 0, mouseY = 0;
-  let cursorX = 0, cursorY = 0;
-  let followerX = 0, followerY = 0;
+  let mouseX = 0,
+    mouseY = 0;
+  let cursorX = 0,
+    cursorY = 0;
+  let followerX = 0,
+    followerY = 0;
 
   if (cursor && follower && canUseHoverEffects) {
     document.addEventListener("mousemove", (e) => {
@@ -126,12 +141,12 @@ document.addEventListener("DOMContentLoaded", () => {
       cursorX += (mouseX - cursorX) * 0.25;
       cursorY += (mouseY - cursorY) * 0.25;
       gsap.set(cursor, { x: cursorX, y: cursorY });
-      
+
       // Slower spring for follower circle
       followerX += (mouseX - followerX) * 0.12;
       followerY += (mouseY - followerY) * 0.12;
       gsap.set(follower, { x: followerX, y: followerY });
-      
+
       requestAnimationFrame(animateCursor);
     }
     animateCursor();
@@ -156,7 +171,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!el) return;
     const words = el.innerText.trim().split(/\s+/);
     el.innerHTML = words
-      .map((word) => `<span class="word-mask"><span class="word-inner">${word}</span></span>`)
+      .map(
+        (word) =>
+          `<span class="word-mask"><span class="word-inner">${word}</span></span>`,
+      )
       .join(" ");
   };
 
@@ -164,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const overline = document.querySelector(".hero .overline");
   const displayTitle = document.querySelector(".hero .display");
   const subtitle = document.querySelector(".hero .subtitle");
-  
+
   splitText(overline);
   splitText(displayTitle);
   splitText(subtitle);
@@ -179,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
     introTl.fromTo(
       ".grid-line-v",
       { height: "0%" },
-      { height: "100%", duration: 1.4, ease: "power4.inOut", stagger: 0.15 }
+      { height: "100%", duration: 1.4, ease: "power4.inOut", stagger: 0.15 },
     );
   }
 
@@ -192,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "power3.out",
       stagger: useLiteMotion ? 0.015 : 0.05,
     },
-    "-=0.8"
+    "-=0.8",
   );
   introTl.to(
     ".hero .display .word-inner",
@@ -202,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: useLiteMotion ? "power3.out" : "power4.out",
       stagger: useLiteMotion ? 0.012 : 0.04,
     },
-    "-=0.8"
+    "-=0.8",
   );
   introTl.to(
     ".hero .subtitle .word-inner",
@@ -212,13 +230,18 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "power3.out",
       stagger: useLiteMotion ? 0.01 : 0.03,
     },
-    "-=0.9"
+    "-=0.9",
   );
   introTl.fromTo(
     ".hero-actions",
     { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: useLiteMotion ? 0.4 : 0.8, ease: "power3.out" },
-    "-=0.6"
+    {
+      opacity: 1,
+      y: 0,
+      duration: useLiteMotion ? 0.4 : 0.8,
+      ease: "power3.out",
+    },
+    "-=0.6",
   );
 
   // ============================================
@@ -239,14 +262,16 @@ document.addEventListener("DOMContentLoaded", () => {
           end: "bottom top",
           scrub: true,
         },
-      }
+      },
     );
   }
 
   // ============================================
   // 8. SCROLL REVEAL ANIMATIONS
   // ============================================
-  const reveals = document.querySelectorAll(".reveal:not(.hero *):not(#credentials .reveal)");
+  const reveals = document.querySelectorAll(
+    ".reveal:not(.hero *):not(#credentials .reveal)",
+  );
   reveals.forEach((el) => {
     gsap.fromTo(
       el,
@@ -259,9 +284,11 @@ document.addEventListener("DOMContentLoaded", () => {
         scrollTrigger: {
           trigger: el,
           start: "top 85%",
-          toggleActions: useLiteMotion ? "play none none none" : "play none none reverse",
+          toggleActions: useLiteMotion
+            ? "play none none none"
+            : "play none none reverse",
         },
-      }
+      },
     );
   });
 
@@ -270,14 +297,27 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================
   const credentialsSection = document.querySelector("#credentials");
   if (credentialsSection && !useLiteMotion) {
-    const credentialsInfo = credentialsSection.querySelector(".credentials-info");
-    const educationTitle = credentialsSection.querySelector(".education-group .credential-group-title");
-    const educationTimeline = credentialsSection.querySelector(".education-timeline");
-    const educationSteps = credentialsSection.querySelectorAll(".education-step");
-    const educationMarkers = credentialsSection.querySelectorAll(".education-marker");
-    const certificationTitle = credentialsSection.querySelector(".certification-group .credential-group-title");
-    const certificationSlider = credentialsSection.querySelector(".certification-slider");
-    const certificationCards = credentialsSection.querySelectorAll(".certification-card");
+    const credentialsInfo =
+      credentialsSection.querySelector(".credentials-info");
+    const educationTitle = credentialsSection.querySelector(
+      ".education-group .credential-group-title",
+    );
+    const educationTimeline = credentialsSection.querySelector(
+      ".education-timeline",
+    );
+    const educationSteps =
+      credentialsSection.querySelectorAll(".education-step");
+    const educationMarkers =
+      credentialsSection.querySelectorAll(".education-marker");
+    const certificationTitle = credentialsSection.querySelector(
+      ".certification-group .credential-group-title",
+    );
+    const certificationSlider = credentialsSection.querySelector(
+      ".certification-slider",
+    );
+    const certificationCards = credentialsSection.querySelectorAll(
+      ".certification-card",
+    );
 
     if (educationTimeline) {
       gsap.set(educationTimeline, { "--timeline-progress": 0 });
@@ -295,7 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
       credentialsTl.fromTo(
         credentialsInfo,
         { autoAlpha: 0, y: 46 },
-        { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" }
+        { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" },
       );
     }
 
@@ -304,7 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
         educationTitle,
         { autoAlpha: 0, y: 26 },
         { autoAlpha: 1, y: 0, duration: 0.45, ease: "power3.out" },
-        "-=0.25"
+        "-=0.25",
       );
     }
 
@@ -314,12 +354,12 @@ document.addEventListener("DOMContentLoaded", () => {
           educationTimeline,
           { autoAlpha: 0, y: 34 },
           { autoAlpha: 1, y: 0, duration: 0.55, ease: "power3.out" },
-          "-=0.15"
+          "-=0.15",
         )
         .to(
           educationTimeline,
           { "--timeline-progress": 1, duration: 0.75, ease: "power2.out" },
-          "-=0.3"
+          "-=0.3",
         );
     }
 
@@ -336,7 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
           stagger: 0.08,
           clearProps: "transform",
         },
-        "-=0.55"
+        "-=0.55",
       );
     }
 
@@ -352,7 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
           stagger: 0.08,
           clearProps: "transform",
         },
-        "-=0.55"
+        "-=0.55",
       );
     }
 
@@ -361,7 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
         certificationTitle,
         { autoAlpha: 0, y: 26 },
         { autoAlpha: 1, y: 0, duration: 0.45, ease: "power3.out" },
-        "-=0.1"
+        "-=0.1",
       );
     }
 
@@ -376,7 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
           duration: 0.75,
           ease: "power3.out",
         },
-        "-=0.2"
+        "-=0.2",
       );
     }
 
@@ -392,7 +432,7 @@ document.addEventListener("DOMContentLoaded", () => {
           stagger: 0.025,
           clearProps: "transform",
         },
-        "-=0.55"
+        "-=0.55",
       );
     }
   }
@@ -402,12 +442,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================
   const preview = document.querySelector(".project-floating-preview");
   const previewImg = preview ? preview.querySelector(".preview-img") : null;
-  const previewItems = document.querySelectorAll(
-    ".project-row[data-image], .certification-card[data-image]"
-  );
+  const previewItems = document.querySelectorAll(".project-row[data-image]");
 
-  let targetX = 0, targetY = 0;
-  let previewX = 0, previewY = 0;
+  let targetX = 0,
+    targetY = 0;
+  let previewX = 0,
+    previewY = 0;
 
   if (preview && previewImg && canUseHoverEffects) {
     const setPreviewPosition = () => {
@@ -439,15 +479,17 @@ document.addEventListener("DOMContentLoaded", () => {
           previewImg.alt = item.dataset.previewAlt || "";
           const webpUrl = item.dataset.imageWebp;
           if (supportsWebp && webpUrl && !missingOptimizedImages.has(webpUrl)) {
-            preloadImage(webpUrl, () => {
-              previewImg.src = webpUrl;
-            }, () => {
-              missingOptimizedImages.add(webpUrl);
-            });
+            preloadImage(
+              webpUrl,
+              () => {
+                previewImg.src = webpUrl;
+              },
+              () => {
+                missingOptimizedImages.add(webpUrl);
+              },
+            );
           }
         }
-        const isCertificatePreview = item.classList.contains("certification-card");
-        preview.classList.toggle("certificate-preview", isCertificatePreview);
         previewX = targetX;
         previewY = targetY;
         setPreviewPosition();
@@ -455,11 +497,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       item.addEventListener("mouseleave", () => {
         preview.classList.remove("active");
-        window.setTimeout(() => {
-          if (!preview.classList.contains("active")) {
-            preview.classList.remove("certificate-preview");
-          }
-        }, 180);
       });
     });
   }
@@ -469,57 +506,103 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================
   const projectDetails = {
     "ccdi-career": {
-      count: "01 / 04",
+      count: "01 / 06",
       title: "CCDI Automated Career Assessment Test",
       type: "Full Stack",
       shortDescription:
         "AI-assisted student assessment platform that recommends career tracks and supports enrollment decisions for CCDI.",
-      stack: ["MongoDB", "React", "Node.js", "Express"],
+      stack: [
+        "MongoDB",
+        "React",
+        "Node.js",
+        "Express",
+        "Google Gemini API",
+        "JWT Auth",
+      ],
       image: "ccdi-career.webp",
       imageAlt: "CCDI Automated Career Assessment Test interface",
       site: "https://ccdi-career-assestment.vercel.app",
       github: "https://github.com/koala-bonjing/ccdi-career-assestment",
+      proof: [
+        {
+          label: "Role",
+          value: "Lead full-stack developer",
+        },
+        {
+          label: "Impact",
+          value: "Digitized CCDI's paper-based admission assessment workflow",
+        },
+        {
+          label: "Validation",
+          value: "Live Vercel deployment and formal thesis evaluation",
+        },
+      ],
       overview:
-        "This project turns career assessment into a guided digital workflow. Students answer structured questions, the system processes their responses, and the interface presents career-aligned recommendations that are easier for staff and students to review.",
+        "This project turns career assessment into a guided digital workflow. Students answer structured questions, Gemini evaluates their responses, and the interface presents course-aligned recommendations that are easier for staff and students to review.",
       features: [
         "Student-friendly assessment flow with clear step-by-step progression.",
-        "Career recommendation output designed for enrollment support.",
-        "Full-stack data handling for storing assessments and results.",
+        "Gemini-powered evaluation that generates personalized recommendations across CCDI programs.",
+        "JWT-based authentication and session handling for student access.",
+        "Full-stack data handling for storing assessments, users, and results.",
         "Responsive interface for reviewing results across desktop and mobile.",
       ],
       process: [
         "Mapped the assessment journey around how students answer questions and how staff interpret results.",
         "Designed the interface to keep long forms approachable through hierarchy, spacing, and progressive feedback.",
-        "Built the MERN workflow around reusable UI patterns and clear API boundaries.",
+        "Built the MERN workflow around reusable UI patterns, API boundaries, and secure student sessions.",
       ],
     },
+
     labxchange: {
-      count: "02 / 04",
-      title: "LabXchange 360",
+      count: "02 / 06",
+      title: "LabXChange360",
       type: "Frontend",
       shortDescription:
-        "Healthcare laboratory interface focused on secure workflows, role-based access, and reliable patient data handling.",
-      stack: ["React", "shadcn/ui", "TanStack Query", "REST APIs"],
+        "Production healthcare LIS interface focused on secure role-aware workflows, patient data handling, and reliable frontend delivery.",
+      stack: [
+        "React 18 (Vite)",
+        "TypeScript",
+        "Tailwind CSS v4",
+        "TanStack Query",
+        "Zustand",
+        "Zod",
+        "Vitest",
+      ],
       image: "labX.webp",
-      imageAlt: "LabXchange 360 dashboard interface",
+      imageAlt: "LabXChange360 dashboard interface",
       site: "",
       github: "",
+      proof: [
+        {
+          label: "Role",
+          value: "Frontend intern on production healthcare workflows",
+        },
+        {
+          label: "Scope",
+          value: "2FA, RBAC, audit logging, API validation, and print documents",
+        },
+        {
+          label: "Quality",
+          value: "Vitest coverage, Confluence documentation, and UI handoffs",
+        },
+      ],
       overview:
-        "LabXchange 360 is a production healthcare LIS interface built for laboratory workflows. The front-end work focused on making complex operational data easier to scan, protect, and act on in a real clinical environment.",
+        "LabXChange360 is a healthcare laboratory information system interface designed to support data-heavy patient, test order, and result workflows. As a frontend developer, I worked on secure, role-aware screens while documenting technical progress and UI handoffs in Confluence.",
       features: [
-        "Role-aware interface patterns for sensitive healthcare operations.",
-        "Data-heavy screens structured for fast scanning and reduced mistakes.",
-        "Reusable React components connected to RESTful API workflows.",
-        "Security-conscious UI behavior for access control and data integrity.",
+        "Developed security and access-control features including 2FA, RBAC hierarchy management, and audit logging.",
+        "Built a reusable data table refresh component adopted across multiple modules.",
+        "Engineered dynamic biometric print documents tailored per organization.",
+        "Updated third-party integration forms with revised API validation and MRE Draft Status filtering.",
+        "Wrote Vitest unit tests to protect external service connectivity and validation behavior.",
       ],
       process: [
-        "Studied the operational needs of laboratory users before shaping the interface.",
-        "Prioritized dense but readable layouts over decorative visuals.",
-        "Iterated components around reliability, predictable states, and maintainable front-end structure.",
+        "Translated dense healthcare workflows into readable React and TypeScript interfaces.",
+        "Used TanStack Query, Zustand, and Zod to keep data fetching, state, and validation predictable.",
+        "Documented daily frontend progress, blockers, and UI/UX handoffs in Confluence to support team visibility.",
       ],
     },
     "ccdi-admin": {
-      count: "03 / 04",
+      count: "03 / 06",
       title: "CCDI Automated Career Assessment Test - Admin Dashboard",
       type: "Full Stack",
       shortDescription:
@@ -529,6 +612,20 @@ document.addEventListener("DOMContentLoaded", () => {
       imageAlt: "CCDI admin dashboard interface",
       site: "https://ccdi-admin-capstone.vercel.app/",
       github: "https://github.com/koala-bonjing/ccdi-admin-capstone",
+      proof: [
+        {
+          label: "Role",
+          value: "Full-stack dashboard developer",
+        },
+        {
+          label: "Users",
+          value: "Built around staff review and assessment management tasks",
+        },
+        {
+          label: "Proof",
+          value: "Live admin deployment with public GitHub repository",
+        },
+      ],
       overview:
         "The admin dashboard gives staff a central place to manage career assessment data, inspect student outputs, and support decision-making without digging through raw records or disconnected tools.",
       features: [
@@ -543,8 +640,48 @@ document.addEventListener("DOMContentLoaded", () => {
         "Built the interface with reusable tables, forms, and status patterns to keep the system maintainable.",
       ],
     },
+    "sorsogon-tour": {
+      count: "04 / 06",
+      title: "Sorsogon Virtual Tour Mobile Application",
+      type: "Mobile",
+      shortDescription:
+        "Native Android tourism app with secure captcha login, clickable municipality maps, and realtime Firebase-backed destination data.",
+      stack: ["Java", "Android Studio", "Firebase", "NoSQL", "Captcha"],
+      image: "sorsogon-tour.webp",
+      imageAlt: "Sorsogon Virtual Tour Android application interface",
+      site: "",
+      github: "",
+      proof: [
+        {
+          label: "Context",
+          value: "WorldSkills ITSSB test project",
+        },
+        {
+          label: "Core",
+          value: "Secure login, custom captcha, interactive map, and destination records",
+        },
+        {
+          label: "Data",
+          value: "Firebase NoSQL structure for profiles, fees, amenities, and locations",
+        },
+      ],
+      overview:
+        "The Sorsogon Virtual Tour app is a native Android tourism project built around local destination discovery. It combines a secure login flow, an interactive municipality map, and realtime Firebase data for tourist records, entrance fees, amenities, and user profiles.",
+      features: [
+        "Custom-generated 6-character captcha validation for the login flow.",
+        "Interactive clickable map that highlights selected municipalities.",
+        "Live destination counts and localized historical records.",
+        "Firebase-backed NoSQL structure for profiles, locations, entrance fees, and amenities.",
+        "Native Android screens built in Java with Android Studio.",
+      ],
+      process: [
+        "Followed strict WorldSkills-style structural and design specifications.",
+        "Modeled tourism data around municipalities, destination details, user records, and filtered amenities.",
+        "Focused the mobile flow on secure access, fast destination scanning, and clear local information.",
+      ],
+    },
     syncstudy: {
-      count: "04 / 04",
+      count: "05 / 06",
       title: "SyncStudy - Peer Study Group Finder",
       type: "Full Stack",
       shortDescription:
@@ -554,6 +691,20 @@ document.addEventListener("DOMContentLoaded", () => {
       imageAlt: "SyncStudy peer study group finder interface",
       site: "",
       github: "",
+      proof: [
+        {
+          label: "Status",
+          value: "Student collaboration prototype",
+        },
+        {
+          label: "Focus",
+          value: "Discovery, comparison, and low-friction group joining",
+        },
+        {
+          label: "Backend",
+          value: "Planned around users, groups, participation, and scheduling",
+        },
+      ],
       overview:
         "SyncStudy is a student collaboration platform concept for connecting learners with study groups that fit their subjects, availability, and goals. The project centers on making peer learning easier to discover and organize.",
       features: [
@@ -568,22 +719,81 @@ document.addEventListener("DOMContentLoaded", () => {
         "Planned the data model around scalable group membership and future scheduling features.",
       ],
     },
+    "truck-operations": {
+      count: "06 / 06",
+      title: "KRISDOM IN GO - Truck Operations Management System",
+      type: "Full Stack",
+      shortDescription:
+        "Operations platform for managing dispatch bookings, live fleet status, trip logs, billing records, POD files, and fleet/personnel registration.",
+      stack: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Mantine UI",
+        "Drizzle ORM",
+        "Supabase",
+      ],
+      image: "trucking.webp",
+      imageAlt: "Truck operations management dashboard interface",
+      site: "",
+      github: "",
+      proof: [
+        {
+          label: "Role",
+          value: "Full-stack operations system builder",
+        },
+        {
+          label: "Modules",
+          value: "Dispatch, booking lists, trip logs, billing, PODs, and registration",
+        },
+        {
+          label: "Stack",
+          value: "Next.js, Mantine UI, Drizzle ORM, and Supabase",
+        },
+      ],
+      overview:
+        "The Truck Operations Management System gives dispatchers and admins a centralized workspace for daily fleet operations, from booking trips and monitoring truck availability to organizing billing records and registered clients, trucks, drivers, and helpers.",
+      features: [
+        "Dashboard with income summaries, operation tables, and live fleet status filtering.",
+        "Dispatch booking workflow for clients, routes, trucks, drivers, helpers, pickup details, and drop-off information.",
+        "Booking list and trip logs for reviewing, updating, and completing trip records.",
+        "Billing module with date/client filters, trip summaries, CSV export, POD preview, and POD download handling.",
+        "Registration tools for managing clients, trucks, drivers, and helpers.",
+      ],
+      process: [
+        "Separated daily operations into dashboard, dispatch, booking, trip log, billing, and registration modules.",
+        "Built reusable Mantine-based tables, forms, modals, badges, and action controls for consistent workflows.",
+        "Structured the system around dispatcher and admin tasks to reduce manual record tracking and improve operational visibility.",
+      ],
+    },
   };
 
   const projectModal = document.getElementById("projectModal");
   const projectModalTitle = document.getElementById("projectModalTitle");
-  const projectModalDescription = document.getElementById("projectModalDescription");
+  const projectModalDescription = document.getElementById(
+    "projectModalDescription",
+  );
   const projectModalType = document.getElementById("projectModalType");
   const projectModalCount = document.getElementById("projectModalCount");
   const projectModalStack = document.getElementById("projectModalStack");
   const projectModalImage = document.getElementById("projectModalImage");
+  const projectModalImageButton = document.getElementById(
+    "projectModalImageButton",
+  );
+  const projectModalProof = document.getElementById("projectModalProof");
   const projectModalOverview = document.getElementById("projectModalOverview");
   const projectModalFeatures = document.getElementById("projectModalFeatures");
   const projectModalProcess = document.getElementById("projectModalProcess");
   const projectModalSite = document.getElementById("projectModalSite");
   const projectModalGithub = document.getElementById("projectModalGithub");
   const projectModalPanel = projectModal?.querySelector(".project-modal-panel");
+  const imageLightbox = document.getElementById("imageLightbox");
+  const imageLightboxImage = document.getElementById("imageLightboxImage");
+  const imageLightboxClose = imageLightbox?.querySelector(
+    ".image-lightbox-close",
+  );
   let projectModalLastFocus = null;
+  let imageLightboxLastFocus = null;
 
   const renderList = (target, items) => {
     if (!target) return;
@@ -593,6 +803,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const renderStack = (target, items) => {
     if (!target) return;
     target.innerHTML = items.map((item) => `<span>${item}</span>`).join("");
+  };
+
+  const renderProof = (target, items = []) => {
+    if (!target) return;
+
+    target.hidden = items.length === 0;
+    target.innerHTML = items
+      .map(
+        (item) => `
+          <article class="project-proof-card">
+            <span>${item.label}</span>
+            <strong>${item.value}</strong>
+          </article>
+        `,
+      )
+      .join("");
   };
 
   const setModalAction = (link, url) => {
@@ -611,6 +837,34 @@ document.addEventListener("DOMContentLoaded", () => {
     link.setAttribute("tabindex", "-1");
   };
 
+  const closeImageLightbox = ({ restoreFocus = true } = {}) => {
+    if (!imageLightbox) return;
+
+    imageLightbox.classList.remove("active");
+    imageLightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("image-lightbox-open");
+
+    if (!projectModal?.classList.contains("active")) {
+      document.body.classList.remove("modal-open");
+    }
+
+    if (restoreFocus) {
+      imageLightboxLastFocus?.focus();
+    }
+  };
+
+  const openImageLightbox = (trigger) => {
+    if (!imageLightbox || !imageLightboxImage || !projectModalImage?.src) return;
+
+    imageLightboxLastFocus = trigger;
+    imageLightboxImage.src = projectModalImage.src;
+    imageLightboxImage.alt = projectModalImage.alt;
+    document.body.classList.add("modal-open", "image-lightbox-open");
+    imageLightbox.classList.add("active");
+    imageLightbox.setAttribute("aria-hidden", "false");
+    imageLightboxClose?.focus();
+  };
+
   const openProjectModal = (projectId, trigger) => {
     const project = projectDetails[projectId];
     if (!project || !projectModal) return;
@@ -622,8 +876,13 @@ document.addEventListener("DOMContentLoaded", () => {
     projectModalCount.textContent = project.count;
     projectModalImage.src = project.image;
     projectModalImage.alt = project.imageAlt;
+    projectModalImageButton?.setAttribute(
+      "aria-label",
+      `Open larger preview of ${project.title}`,
+    );
     projectModalOverview.textContent = project.overview;
     renderStack(projectModalStack, project.stack);
+    renderProof(projectModalProof, project.proof);
     renderList(projectModalFeatures, project.features);
     renderList(projectModalProcess, project.process);
     setModalAction(projectModalSite, project.site);
@@ -638,20 +897,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeProjectModal = () => {
     if (!projectModal) return;
 
+    closeImageLightbox({ restoreFocus: false });
     projectModal.classList.remove("active");
     projectModal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("modal-open");
     projectModalLastFocus?.focus();
   };
 
-  const projectRows = document.querySelectorAll(".project-row[data-project-id]");
+  const projectRows = document.querySelectorAll(
+    ".project-row[data-project-id]",
+  );
   projectRows.forEach((row) => {
     const project = projectDetails[row.dataset.projectId];
 
     row.setAttribute("role", "button");
     row.setAttribute("tabindex", "0");
     row.setAttribute("aria-haspopup", "dialog");
-    row.setAttribute("aria-label", `Open details for ${project?.title || "project"}`);
+    row.setAttribute(
+      "aria-label",
+      `Open details for ${project?.title || "project"}`,
+    );
     row.querySelector(".project-link")?.setAttribute("tabindex", "-1");
 
     row.addEventListener("click", (event) => {
@@ -670,8 +935,25 @@ document.addEventListener("DOMContentLoaded", () => {
     control.addEventListener("click", closeProjectModal);
   });
 
+  projectModalImageButton?.addEventListener("click", () => {
+    openImageLightbox(projectModalImageButton);
+  });
+
+  imageLightbox?.querySelectorAll("[data-image-lightbox-close]").forEach(
+    (control) => {
+      control.addEventListener("click", () => closeImageLightbox());
+    },
+  );
+
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && projectModal?.classList.contains("active")) {
+    if (event.key !== "Escape") return;
+
+    if (imageLightbox?.classList.contains("active")) {
+      closeImageLightbox();
+      return;
+    }
+
+    if (projectModal?.classList.contains("active")) {
       closeProjectModal();
     }
   });
@@ -681,11 +963,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const rect = projectModalPanel.getBoundingClientRect();
       projectModalPanel.style.setProperty(
         "--modal-cursor-x",
-        `${event.clientX - rect.left}px`
+        `${event.clientX - rect.left}px`,
       );
       projectModalPanel.style.setProperty(
         "--modal-cursor-y",
-        `${event.clientY - rect.top}px`
+        `${event.clientY - rect.top}px`,
       );
       projectModalPanel.classList.add("cursor-active");
     });
@@ -706,13 +988,13 @@ document.addEventListener("DOMContentLoaded", () => {
       // Update active button state
       filterBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
-      
+
       const filter = btn.dataset.filter;
       const activeRows = [];
 
       rows.forEach((row) => {
         const match = filter === "all" || row.dataset.category === filter;
-        
+
         if (match) {
           row.style.display = "grid";
           activeRows.push(row);
@@ -724,8 +1006,8 @@ document.addEventListener("DOMContentLoaded", () => {
               y: 0,
               duration: 0.5,
               ease: "power3.out",
-              clearProps: "all"
-            }
+              clearProps: "all",
+            },
           );
         } else {
           gsap.to(row, {
@@ -752,7 +1034,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const rect = el.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        
+
         // Magnetic pull with 35% influence
         gsap.to(el, {
           x: x * 0.35,
@@ -826,12 +1108,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const name = document.getElementById("name")?.value || "";
       const email = document.getElementById("email")?.value || "";
       const message = document.getElementById("message")?.value || "";
-      
+
       if (name && email && message) {
         formStatus.textContent = "✓ Message sent successfully! (Demo)";
         formStatus.style.color = "var(--accent)";
         contactForm.reset();
-        
+
         // Clear status after 3 seconds
         setTimeout(() => {
           formStatus.textContent = "";
@@ -839,7 +1121,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         formStatus.textContent = "✗ Please fill in all fields.";
         formStatus.style.color = "#ff4444";
-        
+
         setTimeout(() => {
           if (formStatus.textContent === "✗ Please fill in all fields.") {
             formStatus.textContent = "";
@@ -850,23 +1132,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // 14. CERTIFICATION SLIDER PAUSE ON HOVER
+  // 14. CERTIFICATION SLIDER
   // ============================================
   const certSlider = document.querySelector(".certification-slider");
   const certTrack = document.querySelector(".certification-track");
-  
-  if (certSlider && certTrack && canUseHoverEffects) {
-    certSlider.addEventListener("mouseenter", () => {
-      certTrack.style.animationPlayState = "paused";
-    });
-    certSlider.addEventListener("mouseleave", () => {
-      certTrack.style.animationPlayState = "running";
-    });
+
+  if (certTrack) {
+    const syncCertificationLoop = () => {
+      const firstLoop = certTrack.querySelector(
+        ".certification-loop:not([aria-hidden])",
+      );
+      if (!firstLoop) return;
+
+      const trackStyle = window.getComputedStyle(certTrack);
+      const trackGap =
+        Number.parseFloat(trackStyle.columnGap || trackStyle.gap) || 0;
+      const loopWidth = firstLoop.getBoundingClientRect().width;
+      if (!loopWidth) return;
+
+      certTrack.style.setProperty(
+        "--cert-loop-distance",
+        `${-(loopWidth + trackGap)}px`,
+      );
+    };
+
+    syncCertificationLoop();
+    window.addEventListener("resize", syncCertificationLoop);
+    window.addEventListener("load", syncCertificationLoop);
   }
 
   if (certSlider && certTrack) {
     const mobileCertCards = certSlider.querySelectorAll(
-      ".certification-loop:not([aria-hidden]) .certification-card"
+      ".certification-loop:not([aria-hidden]) .certification-card",
     );
 
     if (mobileCertCards.length > 1) {
@@ -894,7 +1191,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const setActiveDot = (activeIndex) => {
         dotButtons.forEach((dot, index) => {
           dot.classList.toggle("active", index === activeIndex);
-          dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+          dot.setAttribute(
+            "aria-current",
+            index === activeIndex ? "true" : "false",
+          );
         });
       };
 
@@ -906,7 +1206,10 @@ document.addEventListener("DOMContentLoaded", () => {
           : firstCard.offsetWidth;
         return Math.max(
           0,
-          Math.min(mobileCertCards.length - 1, Math.round(certTrack.scrollLeft / step))
+          Math.min(
+            mobileCertCards.length - 1,
+            Math.round(certTrack.scrollLeft / step),
+          ),
         );
       };
 
@@ -933,7 +1236,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 16. REFRESH SCROLLTRIGGER (for dynamic content)
   // ============================================
   ScrollTrigger.refresh();
-  
+
   // Optional: Small delay to ensure all images are loaded
   window.addEventListener("load", () => {
     ScrollTrigger.refresh();

@@ -42,8 +42,8 @@
           <ul>
             <li><a href="#about" data-cursor="hover">About</a></li>
             <li><a href="#projects" data-cursor="hover">Work</a></li>
-            <li><a href="#skills" data-cursor="hover">Skills</a></li>
-            <li><a href="#credentials" data-cursor="hover">Credentials</a></li>
+            <li><a href="#skills" data-cursor="hover">Stack</a></li>
+            <li><a href="#credentials" data-cursor="hover">Education</a></li>
             <li><a href="#experience" data-cursor="hover">Experience</a></li>
             <li><a href="#contact" data-cursor="hover">Contact</a></li>
           </ul>
@@ -67,11 +67,10 @@
             <p class="overline reveal">Software Developer</p>
             <h1 class="display reveal">Sonny Dela Cruz</h1>
             <p class="subtitle reveal">
-              Full-stack developer who knows just enough to know nothing. Built
-              real things — an AI-powered assessment platform, a medical SaaS
-              app, and a logistics system — and learned something new breaking
-              each one. Still hungry, always growing. | React · TypeScript ·
-              Node.js · Next.js · AI Integration
+              Full-stack developer from Irosin, Sorsogon building practical
+              systems for education, healthcare, logistics, and local tourism. I
+              care about clean interfaces, reliable data flow, and proof over
+              noise. React, TypeScript, Node.js, Next.js, and AI integration.
             </p>
 
             <div class="hero-actions reveal">
@@ -112,9 +111,9 @@
             <p>
               I'm Sonny, a full-stack developer based in Irosin, Sorsogon with a
               background in building production-ready web applications. I
-              graduated with a BS in Computer Science from CCDI, where I also
-              led the development of the CCDI Automated Career Assessment Test —
-              an AI-powered platform now used for institutional enrollment. I've
+              studied BS Computer Science at CCDI, where I also led the
+              development of the CCDI Automated Career Assessment Test — an
+              AI-powered platform now used for institutional enrollment. I've
               worked professionally as a frontend intern at OnDemand Innovation,
               building React/TypeScript UIs integrated with RESTful APIs in a
               Scrum environment, and contributed to a production healthcare LIS
@@ -127,9 +126,9 @@
             </p>
             <div class="tech-tags">
               <span>JavaScript</span><span>TypeScript</span><span>Java</span
-              ><span>C#</span><span>Python</span><span>React</span>
-              <span>Node.js</span><span>CSS Architecture</span> <span>GSAP</span
-              ><span>Web Performance</span>
+              ><span>Python</span><span>React</span><span>Node.js</span
+              ><span>Firebase</span><span>Gemini API</span><span>JWT Auth</span
+              ><span>CSS Architecture</span><span>Web Performance</span>
             </div>
           </div>
         </div>
@@ -161,12 +160,8 @@
             >
               Fullstack
             </button>
-            <button
-              class="filter-btn"
-              data-filter="tooling"
-              data-cursor="hover"
-            >
-              Tooling
+            <button class="filter-btn" data-filter="mobile" data-cursor="hover">
+              Mobile
             </button>
           </div>
           <div class="projects-list col-span-12">
@@ -192,11 +187,11 @@
                   >MongoDB / React / Node.js / Express</span
                 >
                 <p class="project-description">
-                  AI-assisted student assessment platform that recommends
-                  career tracks and supports enrollment decisions for CCDI.
+                  AI-assisted student assessment platform that recommends career
+                  tracks and supports enrollment decisions for CCDI.
                 </p>
               </div>
-              <div class="project-type">FullStack</div>
+              <div class="project-type">Full Stack</div>
               <a
                 href="https://ccdi-career-assestment.vercel.app"
                 class="project-link"
@@ -224,7 +219,7 @@
               <div class="project-title-wrapper">
                 <h3>LabXchange 360</h3>
                 <span class="project-tech"
-                  >React / ShadcnUi / Tanstack Query</span
+                  >React / shadcn/ui / TanStack Query</span
                 >
                 <p class="project-description">
                   Healthcare laboratory interface focused on secure workflows,
@@ -253,7 +248,7 @@
               <div class="project-title-wrapper">
                 <h3>CCDI Automated Career Assessment Test - Admin Dashboard</h3>
                 <span class="project-tech"
-                  >MongoDB / React / Node.js / Express / Mantine Ui</span
+                  >MongoDB / React / Node.js / Express / Mantine UI</span
                 >
                 <p class="project-description">
                   Administrative dashboard for managing assessments, reviewing
@@ -276,6 +271,40 @@
             </article>
             <article
               class="project-row reveal"
+              data-project-id="sorsogon-tour"
+              data-category="mobile"
+              data-image="sorsogon-tour.webp"
+              data-image-webp="sorsogon-tour.webp"
+            >
+              <figure class="project-mobile-media" aria-hidden="true">
+                <img
+                  src="sorsogon-tour.webp"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <div class="project-num">04</div>
+              <div class="project-title-wrapper">
+                <h3>Sorsogon Virtual Tour Mobile Application</h3>
+                <span class="project-tech"
+                  >Java / Android Studio / Firebase / NoSQL</span
+                >
+                <p class="project-description">
+                  Native Android tourism app with secure captcha login,
+                  clickable municipality maps, and realtime destination data.
+                </p>
+              </div>
+              <div class="project-type">Mobile</div>
+              <a href="#" class="project-link" data-cursor="hover">
+                <span class="arrow-wrap"
+                  ><span class="arrow-visible">→</span
+                  ><span class="arrow-hidden">→</span></span
+                >
+              </a>
+            </article>
+            <article
+              class="project-row reveal"
               data-project-id="syncstudy"
               data-category="fullstack"
               data-image="tutor-sync.webp"
@@ -289,7 +318,7 @@
                   decoding="async"
                 />
               </figure>
-              <div class="project-num">04</div>
+              <div class="project-num">05</div>
               <div class="project-title-wrapper">
                 <h3>SyncStudy - Peer Study Group Finder</h3>
                 <span class="project-tech"
@@ -308,135 +337,206 @@
                 >
               </a>
             </article>
+            <article
+              class="project-row reveal"
+              data-project-id="truck-operations"
+              data-category="fullstack"
+              data-image="trucking.webp"
+              data-image-webp="trucking.webp"
+            >
+              <figure class="project-mobile-media" aria-hidden="true">
+                <img
+                  src="trucking.webp"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <div class="project-num">06</div>
+              <div class="project-title-wrapper">
+                <h3>KRISDOM IN GO - Truck Operations Management System</h3>
+                <span class="project-tech"
+                  >Next.js / TypeScript / Mantine UI / Drizzle ORM /
+                  Supabase</span
+                >
+                <p class="project-description">
+                  Operations platform for dispatch bookings, live fleet status,
+                  trip logs, billing records, POD files, and registrations.
+                </p>
+              </div>
+              <div class="project-type">Full Stack</div>
+              <a href="#" class="project-link" data-cursor="hover">
+                <span class="arrow-wrap"
+                  ><span class="arrow-visible">→</span
+                  ><span class="arrow-hidden">→</span></span
+                >
+              </a>
+            </article>
           </div>
         </div>
       </section>
 
-      <!-- Skills Section - 4 Columns -->
-      <section id="skills" class="skills section">
+      <!-- Tech Stack Section -->
+      <section id="skills" class="skills tech-stack section">
         <div class="container grid-12">
-          <h2 class="section-title col-span-12 reveal">Capabilities</h2>
-          <div class="skills-grid col-span-12">
-            <div class="skill-block reveal" data-cursor="hover">
-              <div class="skill-top">
-                <span class="skill-index">01</span>
-                <span class="skill-icon" aria-hidden="true">
-                  <i class="fa-solid fa-layer-group"></i>
-                </span>
+          <div class="tech-stack-heading col-span-12 reveal">
+            <h2 class="section-title">Tech Stack</h2>
+          </div>
+
+          <div class="tech-stack-grid col-span-12">
+            <article class="stack-group reveal">
+              <div class="stack-group-top">
+                <h3>Interface</h3>
               </div>
-              <h3>Frontend</h3>
-              <p class="skill-summary">
-                Product interfaces with responsive structure and smooth motion.
-              </p>
-              <ul>
-                <li>
-                  <span>React / Next.js </span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>TypeScript / JavaScript / Java</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>CSS Architecture / Tailwind / ShadCN</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>Animation / GSAP / Framer Motion</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-              </ul>
-            </div>
-            <div class="skill-block reveal" data-cursor="hover">
-              <div class="skill-top">
-                <span class="skill-index">02</span>
-                <span class="skill-icon" aria-hidden="true">
-                  <i class="fa-solid fa-server"></i>
-                </span>
+              <div class="stack-badges" aria-label="Interface technologies">
+                <span class="stack-badge"
+                  ><i class="fa-brands fa-react"></i>React</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-circle-nodes"></i>Next.js</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-code"></i>TypeScript</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-brands fa-js"></i>JavaScript</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-wind"></i>Tailwind CSS</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-layer-group"></i>shadcn/ui</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-cubes"></i>Mantine UI</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-diagram-project"></i>TanStack
+                  Query</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-boxes-stacked"></i>Zustand</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-wand-magic-sparkles"></i>GSAP</span
+                >
               </div>
-              <h3>Backend</h3>
-              <p class="skill-summary">
-                API logic, data flow, and authentication for usable systems.
-              </p>
-              <ul>
-                <li>
-                  <span>Node.js / Express</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>REST / GraphQL</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>PostgreSQL / MongoDB</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>Authentication & Security</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-              </ul>
-            </div>
-            <div class="skill-block reveal" data-cursor="hover">
-              <div class="skill-top">
-                <span class="skill-index">03</span>
-                <span class="skill-icon" aria-hidden="true">
-                  <i class="fa-solid fa-screwdriver-wrench"></i>
-                </span>
+            </article>
+
+            <article class="stack-group reveal">
+              <div class="stack-group-top">
+                <h3>Backend & Data</h3>
               </div>
-              <h3>Tooling</h3>
-              <p class="skill-summary">
-                Development workflows that keep projects clean and shippable.
-              </p>
-              <ul>
-                <li>
-                  <span>Vite / Webpack / CI/CD</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>VS Code / Android Studio / Codex / Anti-Gravity</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>ESLint / Prettier</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>Performance Auditing</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-              </ul>
-            </div>
-            <div class="skill-block reveal" data-cursor="hover">
-              <div class="skill-top">
-                <span class="skill-index">04</span>
-                <span class="skill-icon" aria-hidden="true">
-                  <i class="fa-solid fa-diagram-project"></i>
-                </span>
+              <div
+                class="stack-badges"
+                aria-label="Backend and data technologies"
+              >
+                <span class="stack-badge"
+                  ><i class="fa-brands fa-node-js"></i>Node.js</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-route"></i>Express</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-brands fa-python"></i>Python</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-network-wired"></i>REST APIs</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-leaf"></i>MongoDB</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-database"></i>PostgreSQL</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-table"></i>MySQL</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-fire"></i>Firebase</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-table-cells"></i>Drizzle ORM</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-cloud"></i>Supabase</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-brands fa-java"></i>Java</span
+                >
               </div>
-              <h3>Process</h3>
-              <p class="skill-summary">
-                Practical product thinking from component systems to teamwork.
-              </p>
-              <ul>
-                <li>
-                  <span>Component-Driven Development</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>Design System Implementation</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>Accessibility (WCAG 2.2)</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-                <li>
-                  <span>Agile / Collaborative Workflows</span
-                  ><i class="fa-solid fa-arrow-right"></i>
-                </li>
-              </ul>
-            </div>
+            </article>
+
+            <article class="stack-group reveal">
+              <div class="stack-group-top">
+                <h3>Build & Quality</h3>
+              </div>
+              <div
+                class="stack-badges"
+                aria-label="Build and quality technologies"
+              >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-bolt"></i>Vite</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-cube"></i>Webpack</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-vial"></i>Vitest</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-shield-halved"></i>Zod</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-key"></i>JWT Auth</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-user-shield"></i>OAuth</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-bug"></i>ESLint</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-wand-magic-sparkles"></i>Prettier</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-brands fa-github"></i>GitHub Actions</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-wand-magic-sparkles"></i>Gemini
+                  API</span
+                >
+              </div>
+            </article>
+
+            <article class="stack-group reveal">
+              <div class="stack-group-top">
+                <h3>Tools & Workflow</h3>
+              </div>
+              <div
+                class="stack-badges"
+                aria-label="Tools and workflow platforms"
+              >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-code"></i>VS Code</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-brands fa-android"></i>Android Studio</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-robot"></i>Codex</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-rocket"></i>Anti-Gravity</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-solid fa-list-check"></i>Linear</span
+                >
+                <span class="stack-badge"
+                  ><i class="fa-brands fa-confluence"></i>Confluence</span
+                >
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -444,17 +544,10 @@
       <!-- Credentials Section with Fixed Education Spacing -->
       <section id="credentials" class="credentials section">
         <div class="container grid-12">
-          <div class="credentials-info col-span-12 col-start-1 reveal">
-            <h2 class="section-title">Credentials</h2>
-            <p class="subtitle">
-              Academic foundation separated from professional certificates for
-              easier scanning.
-            </p>
-          </div>
           <div
             class="credential-group education-group col-span-12 col-start-1 reveal"
           >
-            <h3 class="credential-group-title">Education</h3>
+            <h3 class="section-title">Education</h3>
             <div class="education-timeline">
               <article class="education-step" data-cursor="hover">
                 <span class="education-marker" aria-hidden="true"></span>
@@ -557,7 +650,7 @@
                         class="education-meta-icon location"
                         aria-hidden="true"
                       ></span>
-                      Sorosgon City, Philippines
+                      Sorsogon City, Philippines
                     </span>
                     <span class="education-meta">
                       <span
@@ -574,7 +667,7 @@
           <div
             class="credential-group certification-group col-span-12 col-start-1 reveal"
           >
-            <h3 class="credential-group-title">Certifications</h3>
+            <h3 class="section-title">Certifications</h3>
             <div
               class="certification-slider"
               aria-label="Certifications carousel"
@@ -583,28 +676,18 @@
                 <div class="certification-loop">
                   <article
                     class="certification-card"
-                    data-cursor="hover"
                     data-image="certifications/image.webp"
                     data-image-webp="certifications/image.webp"
                     data-preview-alt="Build a Faster, More Structured Express API with Node.js and TypeScript certificate"
                   >
-                    <figure
-                      class="certification-mobile-media"
-                      aria-hidden="true"
-                    >
+                    <figure class="certification-media">
                       <img
                         src="certifications/image.webp"
-                        alt=""
+                        alt="Build a Faster, More Structured Express API with Node.js and TypeScript certificate"
                         loading="lazy"
                         decoding="async"
                       />
                     </figure>
-                    <div
-                      class="credential-logo-placeholder certificate-badge"
-                      aria-hidden="true"
-                    >
-                      <i class="fa-solid fa-award"></i>
-                    </div>
                     <div class="credential-meta">
                       <span class="credential-date">2025</span>
                       <h3>
@@ -620,28 +703,18 @@
                   </article>
                   <article
                     class="certification-card"
-                    data-cursor="hover"
                     data-image="certifications/image%20(1).webp"
                     data-image-webp="certifications/image%20(1).webp"
                     data-preview-alt="Learning TypeScript certificate"
                   >
-                    <figure
-                      class="certification-mobile-media"
-                      aria-hidden="true"
-                    >
+                    <figure class="certification-media">
                       <img
                         src="certifications/image%20(1).webp"
-                        alt=""
+                        alt="Learning TypeScript certificate"
                         loading="lazy"
                         decoding="async"
                       />
                     </figure>
-                    <div
-                      class="credential-logo-placeholder certificate-badge"
-                      aria-hidden="true"
-                    >
-                      <i class="fa-solid fa-award"></i>
-                    </div>
                     <div class="credential-meta">
                       <span class="credential-date">2025</span>
                       <h3>Learning TypeScript</h3>
@@ -654,28 +727,18 @@
                   </article>
                   <article
                     class="certification-card"
-                    data-cursor="hover"
                     data-image="certifications/image%20(2).webp"
                     data-image-webp="certifications/image%20(2).webp"
                     data-preview-alt="React: Using TypeScript certificate"
                   >
-                    <figure
-                      class="certification-mobile-media"
-                      aria-hidden="true"
-                    >
+                    <figure class="certification-media">
                       <img
                         src="certifications/image%20(2).webp"
-                        alt=""
+                        alt="React: Using TypeScript certificate"
                         loading="lazy"
                         decoding="async"
                       />
                     </figure>
-                    <div
-                      class="credential-logo-placeholder certificate-badge"
-                      aria-hidden="true"
-                    >
-                      <i class="fa-solid fa-award"></i>
-                    </div>
                     <div class="credential-meta">
                       <span class="credential-date">2025</span>
                       <h3>React: Using TypeScript</h3>
@@ -688,28 +751,18 @@
                   </article>
                   <article
                     class="certification-card"
-                    data-cursor="hover"
                     data-image="certifications/image%20(3).webp"
                     data-image-webp="certifications/image%20(3).webp"
                     data-preview-alt="TypeScript: Object-Oriented Programming certificate"
                   >
-                    <figure
-                      class="certification-mobile-media"
-                      aria-hidden="true"
-                    >
+                    <figure class="certification-media">
                       <img
                         src="certifications/image%20(3).webp"
-                        alt=""
+                        alt="TypeScript: Object-Oriented Programming certificate"
                         loading="lazy"
                         decoding="async"
                       />
                     </figure>
-                    <div
-                      class="credential-logo-placeholder certificate-badge"
-                      aria-hidden="true"
-                    >
-                      <i class="fa-solid fa-award"></i>
-                    </div>
                     <div class="credential-meta">
                       <span class="credential-date">2025</span>
                       <h3>TypeScript: Object-Oriented Programming</h3>
@@ -724,16 +777,17 @@
                 <div class="certification-loop" aria-hidden="true">
                   <article
                     class="certification-card"
-                    data-cursor="hover"
                     data-image="certifications/image.webp"
                     data-image-webp="certifications/image.webp"
                   >
-                    <div
-                      class="credential-logo-placeholder certificate-badge"
-                      aria-hidden="true"
-                    >
-                      <i class="fa-solid fa-award"></i>
-                    </div>
+                    <figure class="certification-media">
+                      <img
+                        src="certifications/image.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
                     <div class="credential-meta">
                       <span class="credential-date">2025</span>
                       <h3>
@@ -749,16 +803,17 @@
                   </article>
                   <article
                     class="certification-card"
-                    data-cursor="hover"
                     data-image="certifications/image%20(1).webp"
                     data-image-webp="certifications/image%20(1).webp"
                   >
-                    <div
-                      class="credential-logo-placeholder certificate-badge"
-                      aria-hidden="true"
-                    >
-                      <i class="fa-solid fa-award"></i>
-                    </div>
+                    <figure class="certification-media">
+                      <img
+                        src="certifications/image%20(1).webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
                     <div class="credential-meta">
                       <span class="credential-date">2025</span>
                       <h3>Learning TypeScript</h3>
@@ -771,16 +826,17 @@
                   </article>
                   <article
                     class="certification-card"
-                    data-cursor="hover"
                     data-image="certifications/image%20(2).webp"
                     data-image-webp="certifications/image%20(2).webp"
                   >
-                    <div
-                      class="credential-logo-placeholder certificate-badge"
-                      aria-hidden="true"
-                    >
-                      <i class="fa-solid fa-award"></i>
-                    </div>
+                    <figure class="certification-media">
+                      <img
+                        src="certifications/image%20(2).webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
                     <div class="credential-meta">
                       <span class="credential-date">2025</span>
                       <h3>React: Using TypeScript</h3>
@@ -793,16 +849,17 @@
                   </article>
                   <article
                     class="certification-card"
-                    data-cursor="hover"
                     data-image="certifications/image%20(3).webp"
                     data-image-webp="certifications/image%20(3).webp"
                   >
-                    <div
-                      class="credential-logo-placeholder certificate-badge"
-                      aria-hidden="true"
-                    >
-                      <i class="fa-solid fa-award"></i>
-                    </div>
+                    <figure class="certification-media">
+                      <img
+                        src="certifications/image%20(3).webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
                     <div class="credential-meta">
                       <span class="credential-date">2025</span>
                       <h3>TypeScript: Object-Oriented Programming</h3>
@@ -831,7 +888,7 @@
                 <img
                   src="tidewrk.webp"
                   data-webp-src="tidewrk.webp"
-                  alt="Tidewrk logo"
+                  alt="OnDemand Innovation logo"
                   width="260"
                   height="37"
                   loading="lazy"
@@ -839,21 +896,21 @@
                 />
               </div>
               <div class="experience-copy">
-                <h3>
-                  <a
-                    href="https://www.tidewrk.com/"
-                    data-cursor="hover"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Frontend Developer Intern - Tidewrk.inc</a
-                  >
-                </h3>
-                <p>
-                  Crafted slick, type-safe frontends — dynamic assessment
-                  workflows, responsive dashboards, and polished UI components
-                  powered by React, TypeScript, shadcn/ui, TanStack Query, Zod,
-                  and Vitest.
-                </p>
+                <h3>Frontend Developer Intern - OnDemand Innovation</h3>
+                <ul class="experience-highlights">
+                  <li>
+                    Worked across SDLC phases through stand-ups, sprint
+                    planning, and UI handoffs.
+                  </li>
+                  <li>
+                    Used GitHub pull request workflows with CI/CD checks for
+                    linting, tests, and deployment quality.
+                  </li>
+                  <li>
+                    Documented technical decisions, blockers, and frontend
+                    progress in Confluence.
+                  </li>
+                </ul>
               </div>
             </article>
 
@@ -873,41 +930,24 @@
               <div class="experience-copy">
                 <h3>
                   <a href="#" data-cursor="hover"
-                    >Data Collection Specialist - OutXsource Inc</a
+                    >Data Collection Specialist & Data Annotator - OutXsource
+                    Inc</a
                   >
                 </h3>
-                <p>
-                  Gathered, structured, and verified diverse datasets to ensure
-                  high data integrity and accuracy for analytical processing and
-                  reporting.
-                </p>
-              </div>
-            </article>
-
-            <article class="experience-item reveal">
-              <time>2026</time>
-              <div class="experience-logo">
-                <img
-                  src="otxsource.webp"
-                  data-webp-src="otxsource.webp"
-                  alt="OutXsource Inc logo"
-                  width="684"
-                  height="642"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="experience-copy">
-                <h3>
-                  <a href="#" data-cursor="hover"
-                    >Data Annotation Specialist - OutXsource Inc</a
-                  >
-                </h3>
-                <p>
-                  Accurately labeled, tagged, and categorized complex data
-                  assets to train, evaluate, and optimize the performance of
-                  machine learning models.
-                </p>
+                <ul class="experience-highlights">
+                  <li>
+                    Maintained annotation quality against company standards for
+                    production-ready datasets.
+                  </li>
+                  <li>
+                    Reviewed annotation batches to reduce data errors and keep
+                    deliverables consistent.
+                  </li>
+                  <li>
+                    Balanced data collection, labeling, and validation work
+                    across AI pipeline tasks.
+                  </li>
+                </ul>
               </div>
             </article>
 
@@ -920,10 +960,21 @@
                 <h3>
                   <a href="#" data-cursor="hover">Freelance Developer</a>
                 </h3>
-                <p>
-                  Designed and engineered custom web and mobile applications
-                  leveraging Nextjs, React and TypeScript for diverse projects.
-                </p>
+
+                <ul class="experience-highlights">
+                  <li>
+                    Built education, logistics, peer-learning, and tourism
+                    projects from rough workflow to usable UI.
+                  </li>
+                  <li>
+                    Handled authentication, dashboards, CRUD flows, mobile
+                    screens, and data-backed interfaces.
+                  </li>
+                  <li>
+                    Turned thesis and competition-style requirements into
+                    functional deployed or demo-ready systems.
+                  </li>
+                </ul>
               </div>
             </article>
           </div>
@@ -958,6 +1009,14 @@
                 rel="noopener noreferrer"
               >
                 <i class="fa-brands fa-linkedin"></i> LinkedIn
+              </a>
+              <a
+                href="https://www.facebook.com/sonny.delacruz.3532507"
+                data-cursor="hover"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-facebook"></i> Facebook
               </a>
             </div>
           </div>
@@ -1036,13 +1095,33 @@
               <span class="project-modal-count" id="projectModalCount"></span>
             </div>
             <h2 id="projectModalTitle"></h2>
-            <p class="project-modal-description" id="projectModalDescription"></p>
+            <p
+              class="project-modal-description"
+              id="projectModalDescription"
+            ></p>
 
             <div class="project-modal-stack" id="projectModalStack"></div>
+
+            <div
+              class="project-modal-proof"
+              id="projectModalProof"
+              aria-label="Project proof points"
+            ></div>
           </div>
 
           <figure class="project-modal-media">
-            <img src="" alt="" id="projectModalImage" />
+            <button
+              class="project-modal-image-button"
+              type="button"
+              id="projectModalImageButton"
+              aria-label="Open project image preview"
+              data-cursor="hover"
+            >
+              <img src="" alt="" id="projectModalImage" />
+              <span class="project-modal-zoom-icon" aria-hidden="true">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </span>
+            </button>
           </figure>
 
           <div class="project-modal-details">
@@ -1070,7 +1149,10 @@
                 rel="noopener noreferrer"
                 data-cursor="hover"
               >
-                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square"
+                  aria-hidden="true"
+                ></i>
                 Visit Site
               </a>
               <a
@@ -1088,6 +1170,28 @@
           </div>
         </div>
       </article>
+    </div>
+
+    <!-- Project Image Lightbox -->
+    <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+      <div class="image-lightbox-backdrop" data-image-lightbox-close></div>
+      <div
+        class="image-lightbox-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Expanded project image"
+      >
+        <button
+          class="image-lightbox-close"
+          type="button"
+          aria-label="Close expanded image"
+          data-image-lightbox-close
+          data-cursor="hover"
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+        <img src="" alt="" id="imageLightboxImage" />
+      </div>
     </div>
 
     <!-- Project Floating Preview Container -->
