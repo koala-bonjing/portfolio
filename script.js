@@ -518,6 +518,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Express",
         "Google Gemini API",
         "JWT Auth",
+        "Brevo",
+        "Vercel",
       ],
       image: "ccdi-career.webp",
       imageAlt: "CCDI Automated Career Assessment Test interface",
@@ -530,24 +532,25 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
           label: "Impact",
-          value: "Digitized CCDI's paper-based admission assessment workflow",
+          value: "Replaced paper-based admission testing across 8 programs",
         },
         {
           label: "Validation",
-          value: "Live Vercel deployment and formal thesis evaluation",
+          value: "100+ first-cycle enrollees and ISO 25010 evaluation",
         },
       ],
       overview:
-        "This project turns career assessment into a guided digital workflow. Students answer structured questions, Gemini evaluates their responses, and the interface presents course-aligned recommendations that are easier for staff and students to review.",
+        "This project turns CCDI's paper-based admission assessment into a guided digital workflow. Students answer structured questions, Gemini evaluates their responses, and the interface presents personalized course recommendations across 8 programs.",
       features: [
         "Student-friendly assessment flow with clear step-by-step progression.",
-        "Gemini-powered evaluation that generates personalized recommendations across CCDI programs.",
+        "Gemini-powered evaluation that analyzes student responses and generates personalized course recommendations.",
         "JWT-based authentication and session handling for student access.",
-        "Full-stack data handling for storing assessments, users, and results.",
-        "Responsive interface for reviewing results across desktop and mobile.",
+        "Brevo-supported communication flow for enrollment-related messaging.",
+        "Vercel deployment used for institutional admission operations.",
+        "Validated as highly acceptable by 43 students and 3 IT experts through formal ISO 25010 evaluation.",
       ],
       process: [
-        "Mapped the assessment journey around how students answer questions and how staff interpret results.",
+        "Mapped the assessment journey around how future enrollees answer questions and how staff interpret results.",
         "Designed the interface to keep long forms approachable through hierarchy, spacing, and progressive feedback.",
         "Built the MERN workflow around reusable UI patterns, API boundaries, and secure student sessions.",
       ],
@@ -555,7 +558,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     labxchange: {
       count: "02 / 06",
-      title: "LabXChange360",
+      title: "LabXChange",
       type: "Frontend",
       shortDescription:
         "Production healthcare LIS interface focused on secure role-aware workflows, patient data handling, and reliable frontend delivery.",
@@ -569,31 +572,31 @@ document.addEventListener("DOMContentLoaded", () => {
         "Vitest",
       ],
       image: "labX.webp",
-      imageAlt: "LabXChange360 dashboard interface",
+      imageAlt: "LabXChange dashboard interface",
       site: "",
       github: "",
       proof: [
         {
           label: "Role",
-          value: "Frontend intern on production healthcare workflows",
+          value: "Frontend developer contribution in a production healthcare LIS",
         },
         {
           label: "Scope",
-          value: "2FA, RBAC, audit logging, API validation, and print documents",
+          value: "RBAC hierarchy, CRUD audit logs, table refresh, and print docs",
         },
         {
           label: "Quality",
-          value: "Vitest coverage, Confluence documentation, and UI handoffs",
+          value: "Vitest coverage for third-party integration flows",
         },
       ],
       overview:
-        "LabXChange360 is a healthcare laboratory information system interface designed to support data-heavy patient, test order, and result workflows. As a frontend developer, I worked on secure, role-aware screens while documenting technical progress and UI handoffs in Confluence.",
+        "LabXChange360 is a healthcare laboratory information system interface designed to support data-heavy patient, test order, reporting, and integration workflows. As a frontend developer, I contributed production features around access control, auditability, reusable data refresh behavior, print documents, and tested external service integrations.",
       features: [
-        "Developed security and access-control features including 2FA, RBAC hierarchy management, and audit logging.",
-        "Built a reusable data table refresh component adopted across multiple modules.",
-        "Engineered dynamic biometric print documents tailored per organization.",
-        "Updated third-party integration forms with revised API validation and MRE Draft Status filtering.",
-        "Wrote Vitest unit tests to protect external service connectivity and validation behavior.",
+        "Implemented RBAC role hierarchy management as a module feature.",
+        "Built a CRUD-based audit log table for tracking user activity.",
+        "Created a reusable table refresh component that standardized async state handling across data-dependent modules.",
+        "Engineered dynamic biometric print documents configurable per organization.",
+        "Covered third-party integration forms, revised API validation, and MRE Draft Status filtering with Vitest unit tests.",
       ],
       process: [
         "Translated dense healthcare workflows into readable React and TypeScript interfaces.",
@@ -658,19 +661,19 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
           label: "Core",
-          value: "Secure login, custom captcha, interactive map, and destination records",
+          value: "Custom captcha login, interactive map, and live destination tracking",
         },
         {
           label: "Data",
-          value: "Firebase NoSQL structure for profiles, fees, amenities, and locations",
+          value: "Realtime Firebase sync for tourism content",
         },
       ],
       overview:
-        "The Sorsogon Virtual Tour app is a native Android tourism project built around local destination discovery. It combines a secure login flow, an interactive municipality map, and realtime Firebase data for tourist records, entrance fees, amenities, and user profiles.",
+        "The Sorsogon Virtual Tour app is a fully functional native Android tourism project built to meet WorldSkills ITSSB specifications. It combines a custom 6-character alphanumeric captcha login, an interactive municipality map, live destination tracking, and realtime Firebase data sync.",
       features: [
-        "Custom-generated 6-character captcha validation for the login flow.",
+        "Custom-generated 6-character alphanumeric captcha validation for the login flow.",
         "Interactive clickable map that highlights selected municipalities.",
-        "Live destination counts and localized historical records.",
+        "Live destination tracking and localized tourism records.",
         "Firebase-backed NoSQL structure for profiles, locations, entrance fees, and amenities.",
         "Native Android screens built in Java with Android Studio.",
       ],
@@ -732,6 +735,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Mantine UI",
         "Drizzle ORM",
         "Supabase",
+        "React Context",
       ],
       image: "trucking.webp",
       imageAlt: "Truck operations management dashboard interface",
@@ -740,30 +744,32 @@ document.addEventListener("DOMContentLoaded", () => {
       proof: [
         {
           label: "Role",
-          value: "Full-stack operations system builder",
+          value: "Full-stack developer on active production system",
         },
         {
           label: "Modules",
-          value: "Dispatch, booking lists, trip logs, billing, PODs, and registration",
+          value: "Booking, dispatch, fleet status, trip logs, billing, PODs",
         },
         {
-          label: "Stack",
-          value: "Next.js, Mantine UI, Drizzle ORM, and Supabase",
+          label: "Impact",
+          value: "Replaced spreadsheet-based fleet monitoring",
         },
       ],
       overview:
-        "The Truck Operations Management System gives dispatchers and admins a centralized workspace for daily fleet operations, from booking trips and monitoring truck availability to organizing billing records and registered clients, trucks, drivers, and helpers.",
+        "The Truck Operations Management System gives dispatchers and admins a centralized workspace for daily fleet operations. It replaced manual spreadsheet-based monitoring with an active production system covering bookings, dispatch, live fleet status, trip logs, billing, POD files, and registration records.",
       features: [
         "Dashboard with income summaries, operation tables, and live fleet status filtering.",
         "Dispatch booking workflow for clients, routes, trucks, drivers, helpers, pickup details, and drop-off information.",
         "Booking list and trip logs for reviewing, updating, and completing trip records.",
         "Billing module with date/client filters, trip summaries, CSV export, POD preview, and POD download handling.",
+        "Dynamic drop-off fields, client-side pagination, and PDF, XLSX, and DOCX export hooks.",
         "Registration tools for managing clients, trucks, drivers, and helpers.",
       ],
       process: [
         "Separated daily operations into dashboard, dispatch, booking, trip log, billing, and registration modules.",
         "Built reusable Mantine-based tables, forms, modals, badges, and action controls for consistent workflows.",
-        "Structured the system around dispatcher and admin tasks to reduce manual record tracking and improve operational visibility.",
+        "Used shared React Context across modules to keep reporting and operations data consistent.",
+        "Took the system from zero to active production for day-to-day logistics operations.",
       ],
     },
   };
