@@ -119,6 +119,126 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
+  // 3B. AMBIENT SCROLL BACKGROUND
+  // ============================================
+  const scrollAmbient = document.querySelector(".scroll-ambient");
+
+  if (scrollAmbient) {
+    let ambientTween = null;
+
+    const staticAmbientVars = {
+      "--ambient-plane-x": "0px",
+      "--ambient-plane-y": "0vh",
+      "--ambient-line-x": "0px",
+      "--ambient-line-y": "0vh",
+      "--ambient-rotate": "0deg",
+      "--ambient-line-rotate": "0deg",
+      "--ambient-beam-y": "0vh",
+      "--ambient-sweep-y": "10vh",
+      "--ambient-rail-top": "38%",
+    };
+
+    const getAmbientRange = (compactAmbient) =>
+      compactAmbient
+        ? {
+            from: {
+              "--ambient-plane-x": "-18px",
+              "--ambient-plane-y": "-4vh",
+              "--ambient-line-x": "14px",
+              "--ambient-line-y": "-4vh",
+              "--ambient-rotate": "-0.8deg",
+              "--ambient-line-rotate": "0.8deg",
+              "--ambient-beam-y": "0vh",
+              "--ambient-sweep-y": "-24vh",
+              "--ambient-rail-top": "2%",
+            },
+            to: {
+              "--ambient-plane-x": "18px",
+              "--ambient-plane-y": "8vh",
+              "--ambient-line-x": "-14px",
+              "--ambient-line-y": "7vh",
+              "--ambient-rotate": "1.4deg",
+              "--ambient-line-rotate": "-1.4deg",
+              "--ambient-beam-y": "0vh",
+              "--ambient-sweep-y": "58vh",
+              "--ambient-rail-top": "72%",
+            },
+          }
+        : {
+            from: {
+              "--ambient-plane-x": "-54px",
+              "--ambient-plane-y": "-8vh",
+              "--ambient-line-x": "34px",
+              "--ambient-line-y": "-7vh",
+              "--ambient-rotate": "-2deg",
+              "--ambient-line-rotate": "2deg",
+              "--ambient-beam-y": "-18vh",
+              "--ambient-sweep-y": "-34vh",
+              "--ambient-rail-top": "0%",
+            },
+            to: {
+              "--ambient-plane-x": "54px",
+              "--ambient-plane-y": "16vh",
+              "--ambient-line-x": "-34px",
+              "--ambient-line-y": "11vh",
+              "--ambient-rotate": "4deg",
+              "--ambient-line-rotate": "-4deg",
+              "--ambient-beam-y": "32vh",
+              "--ambient-sweep-y": "74vh",
+              "--ambient-rail-top": "78%",
+            },
+          };
+
+    const buildAmbientScroll = () => {
+      if (ambientTween) {
+        ambientTween.scrollTrigger?.kill();
+        ambientTween.kill();
+        ambientTween = null;
+      }
+
+      const compactAmbient =
+        smallScreenQuery.matches || !finePointerQuery.matches;
+      scrollAmbient.classList.toggle("is-compact", compactAmbient);
+      scrollAmbient.classList.toggle("is-reduced", reducedMotionQuery.matches);
+
+      if (reducedMotionQuery.matches) {
+        gsap.set(scrollAmbient, staticAmbientVars);
+        return;
+      }
+
+      const range = getAmbientRange(compactAmbient);
+      ambientTween = gsap.fromTo(scrollAmbient, range.from, {
+        ...range.to,
+        ease: "none",
+        scrollTrigger: {
+          id: "ambient-scroll",
+          start: 0,
+          end: () => ScrollTrigger.maxScroll(window),
+          scrub: compactAmbient ? 0.35 : 0.7,
+          invalidateOnRefresh: true,
+        },
+      });
+    };
+
+    const rebuildAmbientScroll = () => {
+      buildAmbientScroll();
+      ScrollTrigger.refresh();
+    };
+
+    buildAmbientScroll();
+
+    [finePointerQuery, smallScreenQuery, reducedMotionQuery].forEach(
+      (query) => {
+        if (query.addEventListener) {
+          query.addEventListener("change", rebuildAmbientScroll);
+        } else if (query.addListener) {
+          query.addListener(rebuildAmbientScroll);
+        }
+      },
+    );
+  }
+
+  // ============================================
   // 4. CUSTOM CURSOR (Dual-Lerp Animation)
   // ============================================
   const cursor = document.querySelector(".cursor");
@@ -270,7 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 8. SCROLL REVEAL ANIMATIONS
   // ============================================
   const reveals = document.querySelectorAll(
-    ".reveal:not(.hero *):not(#credentials .reveal)",
+    ".reveal:not(.hero *):not(#credentials .reveal):not(#skills .stack-group)",
   );
   reveals.forEach((el) => {
     gsap.fromTo(
@@ -291,6 +411,59 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     );
   });
+
+  const techStackGrid = document.querySelector("#skills .tech-stack-grid");
+  const stackGroups = techStackGrid
+    ? techStackGrid.querySelectorAll(".stack-group")
+    : [];
+
+  if (techStackGrid && stackGroups.length) {
+    const stackTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: techStackGrid,
+        start: "top 84%",
+        toggleActions: useLiteMotion
+          ? "play none none none"
+          : "play none none reverse",
+      },
+    });
+
+    stackTl.fromTo(
+      techStackGrid,
+      {
+        autoAlpha: 0,
+        y: useLiteMotion ? 14 : 28,
+        clipPath: useLiteMotion
+          ? "inset(0% 0% 0% 0%)"
+          : "inset(0% 0% 18% 0%)",
+      },
+      {
+        autoAlpha: 1,
+        y: 0,
+        clipPath: "inset(0% 0% 0% 0%)",
+        duration: useLiteMotion ? 0.38 : 0.68,
+        ease: "power3.out",
+      },
+    );
+
+    stackTl.fromTo(
+      stackGroups,
+      {
+        autoAlpha: 0,
+        y: useLiteMotion ? 12 : 22,
+        scale: useLiteMotion ? 1 : 0.985,
+      },
+      {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        duration: useLiteMotion ? 0.34 : 0.56,
+        ease: "power3.out",
+        clearProps: "transform",
+      },
+      useLiteMotion ? "-=0.28" : "-=0.5",
+    );
+  }
 
   // ============================================
   // 9. CREDENTIALS SECTION SCROLL SEQUENCE
